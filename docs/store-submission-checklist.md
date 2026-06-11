@@ -35,8 +35,8 @@ repo. Run the [testing checklist](testing-checklist.md) first.
 - [ ] Remote code justification: none; all code is bundled; strict CSP.
 - [ ] Data privacy disclosures: collects nothing; sells nothing; no use beyond
       single purpose.
-- [ ] Screenshots updated to show the popup, the hardened status panel, and the
-      advanced/VPN settings.
+- [ ] Screenshots updated to show the popup, a hardened private window, and the
+      advanced settings.
 - [ ] Upload `dist/chromium.zip`.
 
 ## Post-submission

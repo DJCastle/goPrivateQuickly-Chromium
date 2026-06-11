@@ -24,17 +24,9 @@ network prediction, search suggestions, hyperlink auditing, the
 Topics/Ad-measurement/Related-Website-Sets/FLEDGE advertising APIs,
 third-party cookies, and more. The browser restores them automatically
 when the last private window closes; your normal browsing settings are
-never changed and security protections are never touched. A status panel
-shows the outcome of every protection. Optional advanced toggles
-(strict/disabled WebRTC, no referrer headers) and a local VPN reminder
-are off by default.
-
-You can also tell it to:
-
-- **Open a private window automatically** the moment your browser starts.
-- **Ask you on startup** whether to open one — with a configurable
-  3-, 5-, or 7-second countdown and a default action if you don't
-  answer in time.
+never changed and security protections are never touched. Optional
+advanced toggles (strict/disabled WebRTC, no referrer headers) are off
+by default.
 
 The toolbar icon also reflects whether the currently focused window is
 private — a muted silver mask when you're in a normal window, a vivid
@@ -99,18 +91,12 @@ installed software. Full justification lives in
 
 | Setting | What it does | Default |
 | --- | --- | --- |
-| Open a private window when the browser starts | Auto-opens one new private window on browser launch | Off |
-| Ask me on startup | Pops up a Yes/No prompt with a countdown | Off |
-| Ask-me countdown duration | 3, 5, or 7 seconds before the popup auto-closes | 5 |
-| Ask-me default action | Cancel (do nothing) or Open private window on timeout | Cancel |
-| VPN reminder | Show a local reminder before opening Hardened Private Mode | Off |
 | Advanced: strict WebRTC routing (`proxy_only`) | Stricter WebRTC; may break calls/meetings | Off |
 | Advanced: disable WebRTC entirely | Where supported; may break real-time communication | Off |
 | Advanced: disable referrer headers | Where supported; may break some sites/sign-in/payment | Off |
 
-The two startup settings are mutually exclusive — turning one on
-turns the other off. The advanced toggles and VPN reminder are all off
-by default.
+All three advanced toggles are off by default; each is labeled with its
+trade-off.
 
 ## Browser support
 

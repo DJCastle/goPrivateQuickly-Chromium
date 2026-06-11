@@ -26,12 +26,12 @@ No host permissions. No `tabs`, `activeTab`, `cookies`, `downloads`,
 
 ## Reviewer note — why each permission is required
 
-- **`storage`** — The only data stored is the user's own preferences (startup
-  behavior, ask-me countdown, VPN reminder on/off, and three advanced toggles).
-  Total size is well under 1 KB. No browsing history, URLs, queries, page
-  content, cookies, or identifiers are ever stored. Nothing is transmitted.
+- **`storage`** — The only data stored is the user's own preferences (the three
+  advanced Hardened Mode toggles). Total size is well under 1 KB. No browsing
+  history, URLs, queries, page content, cookies, or identifiers are ever stored.
+  Nothing is transmitted.
 
-- **`privacy` (Chromium only)** — Hardened Private Mode applies a fixed,
+- **`privacy`** — Hardened Private Mode applies a fixed,
   documented set of privacy protections to the **private session only**, using
   the `incognito_session_only` scope. This scope means: (a) the user's normal
   browsing settings are never changed; (b) the browser clears the values

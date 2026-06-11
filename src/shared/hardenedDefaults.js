@@ -5,7 +5,7 @@
 // whether the API exists, whether it is controllable, and how to apply it.
 //
 //   id         stable identifier (used by the UI for labels/ordering)
-//   label      human-readable protection name (shown in the status panel)
+//   label      human-readable protection name (used to label each result)
 //   path       property path under chrome.privacy.* (probed for existence)
 //   applyValue value to set when applying the protection
 //   met(v)     true when the current value already satisfies the protection
