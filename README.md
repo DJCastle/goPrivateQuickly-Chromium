@@ -55,7 +55,7 @@ those.
 ## Install
 
 - **Chromium browsers** (Chrome, Brave, Edge, Arc, Opera, Vivaldi):
-  install from the Chrome Web Store. _(Store listing pending v1.0.)_
+  install from the Chrome Web Store. _(Store listing pending review.)_
 
 Using Firefox? It's a separate package —
 [goPrivateQuickly-Firefox](https://github.com/DJCastle/goPrivateQuickly-Firefox).
