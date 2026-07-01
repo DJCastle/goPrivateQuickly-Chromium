@@ -7,7 +7,7 @@ canonical privacy policy is [`../PRIVACY.md`](../PRIVACY.md).
 ## Final permission list
 
 This repository ships the **Chromium** build (Chrome, Edge, Brave, Vivaldi,
-Arc, Opera).
+Arc).
 
 | Permission | Required for | Notes |
 | --- | --- | --- |

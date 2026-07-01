@@ -1,7 +1,7 @@
 # Go Private Quickly (GPQ) — Chromium
 
 > One-click private/incognito windows for Chromium browsers (Chrome, Brave,
-> Edge, Arc, Opera, Vivaldi).
+> Edge, Arc, Vivaldi).
 > No tracking. No analytics. No network requests. Open source under MIT.
 >
 > Firefox build:
@@ -54,13 +54,13 @@ those.
 
 ## Install
 
-- **Chromium browsers** (Chrome, Brave, Edge, Arc, Opera, Vivaldi):
-  install from the Chrome Web Store. _(Store listing pending review.)_
+- **Chromium browsers** (Chrome, Brave, Edge, Arc, Vivaldi):
+  install from the [Chrome Web Store](https://chromewebstore.google.com/detail/binihpnpginmnaodjalkhakakdhhjkkl).
 
 Using Firefox? It's a separate package —
 [goPrivateQuickly-Firefox](https://github.com/DJCastle/goPrivateQuickly-Firefox).
 
-In the meantime you can build and load it from source — see
+Prefer to build and load it from source? See
 [docs/build-instructions.md](docs/build-instructions.md).
 
 ### One quick post-install step
@@ -102,7 +102,7 @@ trade-off.
 
 | Browser | Minimum version |
 | --- | --- |
-| Chrome / Brave / Edge / Arc / Opera / Vivaldi | Chromium 109+ |
+| Chrome / Brave / Edge / Arc / Vivaldi | Chromium 109+ |
 
 Firefox (115+, incl. ESR) ships from the
 [goPrivateQuickly-Firefox](https://github.com/DJCastle/goPrivateQuickly-Firefox)

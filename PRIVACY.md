@@ -62,9 +62,10 @@ Nothing.
 
 If you want technical confirmation, the extension's permissions list
 in your browser's extension manager will show that GPQ requests only
-the `storage` permission and no host permissions at all — your
-browser itself won't let it read or transmit page data even if it
-wanted to.
+the `storage` and `privacy` permissions (the `privacy` permission is
+used solely by Hardened Private Mode — see below) and no host
+permissions at all — your browser itself won't let it read or transmit
+page data even if it wanted to.
 
 The only "external" links you'll see are in the options page and
 onboarding page footers — links to this website and a `mailto:` link

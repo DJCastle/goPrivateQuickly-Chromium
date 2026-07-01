@@ -2,7 +2,7 @@
 
 This document is structured so you can copy-paste each field straight
 into the Chrome Web Store developer dashboard. The CWS listing also
-serves users of **Brave, Microsoft Edge, Arc, Opera, and Vivaldi** —
+serves users of **Brave, Microsoft Edge, Arc, and Vivaldi** —
 all of those browsers install Chromium extensions directly from this
 store. Edge has its own store too, but it's not a v1 target; Edge
 users will be told to install from the CWS in support docs.
@@ -62,7 +62,7 @@ PRIVACY, FOR REAL
 ONE-TIME SETUP
 By browser security policy, an extension can't switch itself on in incognito windows. The first time you install, a short welcome page walks you through flipping "Allow in Incognito." You only do it once.
 
-Works on Chrome and every Chromium browser — Brave, Microsoft Edge, Arc, Opera, and Vivaldi all install it from here.
+Works on Chrome and every Chromium browser — Brave, Microsoft Edge, Arc, and Vivaldi all install it from here.
 
 Open source under the MIT License: https://github.com/DJCastle/goPrivateQuickly-Chromium
 Questions or problems: support@codecraftedapps.com
