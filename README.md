@@ -69,7 +69,7 @@ By browser security policy, extensions can't enable themselves in
 private/incognito mode. The first time you install GPQ it opens a
 welcome page that walks you through the one-time toggle:
 
-- `chrome://extensions/?id=<gpq-id>` → switch on **Allow in Incognito**.
+- `chrome://extensions/?id=binihpnpginmnaodjalkhakakdhhjkkl` → switch on **Allow in Incognito**.
 
 Without that toggle, GPQ can technically run from a normal window but
 can't open private ones on your behalf.
