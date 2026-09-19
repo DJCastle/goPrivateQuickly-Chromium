@@ -1,5 +1,9 @@
 # goPrivateQuickly-Chromium — Claude Instructions
 
+Shared craft rules — imported so every surface loads them, including Xcode's sandboxed agent:
+
+@Agentic_Developer.md
+
 ## Stack & purpose
 
 Standalone **Chromium** build of Go Private Quickly (GPQ): one-click
