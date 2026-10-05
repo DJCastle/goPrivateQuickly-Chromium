@@ -50,6 +50,7 @@ h2 {
 .toggle-text { display: flex; flex-direction: column; gap: 4px; }
 .toggle-title { font-weight: 500; color: var(--text); }
 .toggle-note { font-size: 12px; color: var(--text-muted); }
+.toggle:has(input:disabled) .toggle-title { color: var(--text-muted); }
 
 .section-intro { margin: 0 0 12px; font-size: 12px; color: var(--text-muted); }
 

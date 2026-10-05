@@ -21,9 +21,16 @@ function flashSaved() {
   flashTimer = setTimeout(() => savedEl.classList.remove("show"), 1500);
 }
 
+function showVersion() {
+  const el = document.getElementById("version");
+  if (el) el.textContent = chrome.runtime.getManifest().version;
+}
+
 function annotateAvailability() {
   // "Disable WebRTC entirely" has no Chromium API, so the control would
-  // silently do nothing. Say so plainly instead of offering a dead toggle.
+  // silently do nothing. Grey it out and say so plainly.
+  const input = document.getElementById("adv-disable-webrtc");
+  if (input) input.disabled = true;
   const note = document.getElementById("adv-disable-webrtc-note");
   if (!note) return;
   note.textContent =
@@ -31,6 +38,7 @@ function annotateAvailability() {
 }
 
 (async () => {
+  showVersion();
   annotateAvailability();
   const prefs = await getPrefs();
   for (const [key, id] of Object.entries(FIELDS)) {

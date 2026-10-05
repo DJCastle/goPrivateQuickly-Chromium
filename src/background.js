@@ -12,12 +12,9 @@
 //
 // Hardened Private Mode applies privacy settings with Chromium's
 // incognito_session_only scope (auto-cleared when the last private window
-// closes) or, on Firefox, reports them unavailable. Nothing is ever written
-// at a scope that could outlive the session.
+// closes). Nothing is ever written at a scope that could outlive the session.
 //
 // Notes:
-//   - This file runs as a service worker on Chromium and an event page on
-//     Firefox. Same `chrome.*` API surface works on both.
 //   - Chromium MV3 idles the service worker — never cache state in module
 //     scope. Every event handler re-derives state from the browser.
 
