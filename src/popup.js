@@ -9,8 +9,8 @@
 //     explains what gets tightened; we don't make the user read a report.
 //
 // If hardening can't be applied because Go Private Quickly isn't enabled in
-// private mode yet, the popup opens the one-step onboarding page so the user
-// can fix it, rather than silently opening an unhardened window.
+// private mode yet, no window opens; the popup opens the one-step onboarding
+// page so the user can fix it.
 //
 // All work happens in this popup context. The hardened window is opened
 // unfocused so this popup stays alive long enough to apply the settings,
@@ -45,12 +45,12 @@ el("open-settings").addEventListener("click", () => {
 el("open-hardened").addEventListener("click", async () => {
   const result = await openHardenedSession(buildHardenedSet(await getPrefs()));
 
-  if (result.ok && result.allowed) {
+  if (result.ok) {
     // Hardened applied — bring the private window to the front.
     await focusWindow(result.windowId);
-  } else if (result.ok) {
-    // Window opened but GPQ isn't enabled in private mode, so nothing was
-    // hardened. Send the user to onboarding to enable it.
+  } else if (result.reason === "not-allowed") {
+    // GPQ isn't enabled in private mode, so nothing could be hardened and no
+    // window was opened. Send the user to onboarding to enable it.
     await chrome.tabs.create({ url: chrome.runtime.getURL("onboarding.html") });
   }
   window.close();

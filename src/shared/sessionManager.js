@@ -8,9 +8,11 @@
 // Hardened windows are created UNFOCUSED on purpose: a focused new window
 // would steal focus from the popup's parent window and dismiss the popup
 // before it can finish applying the settings (which all run in the popup
-// context). Once hardening is applied the popup brings the window to the front
-// and closes itself; the window is only left unfocused when hardening couldn't
-// be applied, so the popup can explain why.
+// context). Once hardening is applied the caller brings the window to the front.
+//
+// Access is checked BEFORE any window opens. Without private-mode access
+// nothing can be hardened, and an unhardened window left open in the background
+// is easy to mistake for a hardened one, so none is created.
 //
 // No restoration bookkeeping is stored: Chromium uses incognito_session_only
 // (browser auto-restores; see chromiumAdapter). Nothing is ever written that
@@ -23,14 +25,6 @@ export async function openPlainPrivateWindow() {
 }
 
 export async function openHardenedSession(hardenedSet) {
-  let windowId;
-  try {
-    const win = await chrome.windows.create({ incognito: true, focused: false });
-    windowId = win.id;
-  } catch {
-    return { ok: false, reason: "window-failed", windowId: null, allowed: false };
-  }
-
   let allowed = false;
   try {
     allowed = await chrome.extension.isAllowedIncognitoAccess();
@@ -38,9 +32,15 @@ export async function openHardenedSession(hardenedSet) {
     allowed = false;
   }
   if (!allowed) {
-    // The window opened, but the extension can't run in / control private
-    // mode until the user enables it. Skip applying so we never half-apply.
-    return { ok: true, windowId, allowed: false };
+    return { ok: false, reason: "not-allowed", windowId: null };
+  }
+
+  let windowId;
+  try {
+    const win = await chrome.windows.create({ incognito: true, focused: false });
+    windowId = win.id;
+  } catch {
+    return { ok: false, reason: "window-failed", windowId: null };
   }
 
   // Apply each protection in order. applyOne reports its own failures and
@@ -54,7 +54,7 @@ export async function openHardenedSession(hardenedSet) {
     }
   }
 
-  return { ok: true, windowId, allowed: true };
+  return { ok: true, windowId };
 }
 
 export async function focusWindow(windowId) {
