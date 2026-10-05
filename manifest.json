@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Go Private Quickly",
   "short_name": "GPQ",
-  "version": "1.1.5",
+  "version": "1.2.0",
   "description": "Open a new private/incognito window with one click, with an optional hardened mode that tightens privacy settings for that session.",
   "permissions": [
     "storage",
@@ -33,6 +33,15 @@
   },
   "minimum_chrome_version": "109",
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "commands": {
+    "open-hardened": {
+      "suggested_key": {
+        "default": "Alt+Shift+H"
+      },
+      "description": "Open a Hardened Private Window"
+    }
   }
 }

@@ -7,7 +7,7 @@
 > Firefox build:
 > [goPrivateQuickly-Firefox](https://github.com/DJCastle/goPrivateQuickly-Firefox).
 
-![Version](https://img.shields.io/badge/version-1.1.5-blue)
+![Version](https://img.shields.io/badge/version-1.2.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Manifest](https://img.shields.io/badge/manifest-v3-orange)
 ![Privacy](https://img.shields.io/badge/data%20collection-zero-brightgreen)
@@ -20,13 +20,18 @@ Window** (a normal private/incognito window, nothing else changed) or
 
 **Hardened Private Mode** opens a private window and tightens supported
 privacy settings for that private session only — WebRTC IP protection,
-network prediction, search suggestions, hyperlink auditing, the
-Topics/Ad-measurement/Related-Website-Sets/FLEDGE advertising APIs,
-third-party cookies, and more. The browser restores them automatically
-when the last private window closes; your normal browsing settings are
-never changed and security protections are never touched. Optional
-advanced toggles (strict/disabled WebRTC, no referrer headers) are off
-by default.
+network prediction, search suggestions, hyperlink auditing, third-party
+cookies, and Chrome's advertising APIs (Topics, Ad measurement, Protected
+Audience) on browsers that still have them — Google is retiring those APIs,
+so newer Chrome versions simply skip them. The browser restores everything
+automatically when the last private window closes; your normal browsing
+settings are never changed and security protections are never touched.
+Optional advanced toggles (strict WebRTC routing, no referrer headers) are
+off by default.
+
+A keyboard shortcut, **Alt+Shift+H** (**Option+Shift+H** on Mac), opens a
+Hardened window directly. Change it in your browser's extension shortcuts
+settings.
 
 The toolbar icon also reflects whether the currently focused window is
 private — a vivid purple-and-gold mask when you're in a normal window, a

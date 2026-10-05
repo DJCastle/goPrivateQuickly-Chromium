@@ -5,6 +5,32 @@ All notable changes to this extension are documented in this file.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Version scheme: [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] — 2026-10-05
+
+### Added
+
+- **Keyboard shortcut for a Hardened window.** Alt+Shift+H (Option+Shift+H
+  on Mac) opens a Hardened Private Window without the popup. Change it in the
+  browser's extension shortcuts settings.
+
+### Fixed
+
+- **Hardened no longer leaves an unhardened window behind.** If GPQ wasn't
+  yet allowed in incognito, clicking Hardened used to open a plain private
+  window in the background before showing the setup page. Now it shows the
+  setup page and opens nothing until access is granted.
+- The settings page showed a hard-coded version number; it now reads the
+  installed version.
+- "Disable WebRTC entirely" is now greyed out on Chromium, where no API exists
+  for it, instead of being a checkbox that did nothing.
+
+### Changed
+
+- Descriptions of Hardened mode now say the advertising-API protections
+  (Topics, Ad measurement, Protected Audience) apply only where the browser
+  still has those APIs. Google is retiring them, and GPQ already skipped any
+  that are missing.
+
 ## [1.1.5] — 2026-06-11
 
 ### Changed

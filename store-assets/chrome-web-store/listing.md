@@ -42,7 +42,8 @@ I built it because I open incognito windows all day and wanted it to be one clic
 WHAT YOU GET
 - One click to a new incognito window, straight from the toolbar.
 - A toolbar icon that quietly shows whether the window you're in is private.
-- An optional "Hardened" mode that opens an incognito window and tightens a set of privacy settings for that session only: WebRTC IP protection, network prediction, search suggestions, hyperlink auditing, the Topics / ad-measurement / FLEDGE advertising APIs, third-party cookies, and more. Your browser puts them all back automatically when the last incognito window closes, so your normal browsing is never changed — and security protections (Safe Browsing, your password manager, certificate/HTTPS checks, updates) are never touched.
+- An optional "Hardened" mode that opens an incognito window and tightens a set of privacy settings for that session only: WebRTC IP protection, network prediction, search suggestions, hyperlink auditing, third-party cookies, and Chrome's advertising APIs where your browser still has them, and more. Your browser puts them all back automatically when the last incognito window closes, so your normal browsing is never changed — and security protections (Safe Browsing, your password manager, certificate/HTTPS checks, updates) are never touched.
+- A keyboard shortcut (Alt+Shift+H, or Option+Shift+H on Mac) that opens a Hardened window directly.
 - A few optional Advanced toggles for power users (stricter WebRTC routing, disabling referrer headers) — off by default, each clearly labeled with its trade-off.
 
 WHAT IT HONESTLY DOES NOT DO (I'd rather set expectations than oversell)
@@ -89,7 +90,7 @@ For each permission CWS asks you to justify, paste this:
 
 ### `privacy`
 
-> Used only by the optional Hardened Private Mode, and only when the user explicitly opens a hardened private window. The extension applies a fixed, documented set of privacy settings (WebRTC IP handling, network prediction, search suggestions, hyperlink auditing, alternate error pages, online spelling service, the Topics/Ad-measurement/Related-Website-Sets/FLEDGE advertising APIs, and third-party cookies) using the `incognito_session_only` scope, so the changes apply to the private session only and the browser clears them automatically when the last private window closes. The user's normal-browsing settings are never changed. Security-related settings (Safe Browsing, password manager, certificate/HTTPS/update/download protections, autofill) are never read or modified. The permission also lets the extension read each setting's `levelOfControl` so it can accurately report when a setting is locked by enterprise policy or another extension.
+> Used only by the optional Hardened Private Mode, and only when the user explicitly opens a hardened private window. The extension applies a fixed, documented set of privacy settings (WebRTC IP handling, network prediction, search suggestions, hyperlink auditing, alternate error pages, online spelling service, third-party cookies, and the Topics/Ad-measurement/Protected-Audience advertising APIs where the browser still provides them) using the `incognito_session_only` scope, so the changes apply to the private session only and the browser clears them automatically when the last private window closes. The user's normal-browsing settings are never changed. Security-related settings (Safe Browsing, password manager, certificate/HTTPS/update/download protections, autofill) are never read or modified. The permission also lets the extension read each setting's `levelOfControl` so it can accurately report when a setting is locked by enterprise policy or another extension.
 
 ## Host permission justifications
 

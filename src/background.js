@@ -10,6 +10,9 @@
 // have both a default_popup and an action.onClicked handler, so the
 // window-open logic lives in the popup, not here.
 //
+// The "open-hardened" keyboard command (manifest "commands") is the one action
+// handled here: it runs the same hardened-session code as the popup.
+//
 // Hardened Private Mode applies privacy settings with Chromium's
 // incognito_session_only scope (auto-cleared when the last private window
 // closes). Nothing is ever written at a scope that could outlive the session.
@@ -17,6 +20,13 @@
 // Notes:
 //   - Chromium MV3 idles the service worker — never cache state in module
 //     scope. Every event handler re-derives state from the browser.
+
+import {
+  openHardenedSession,
+  focusWindow,
+} from "./shared/sessionManager.js";
+import { buildHardenedSet } from "./shared/hardenedDefaults.js";
+import { getPrefs } from "./shared/prefs.js";
 
 // Ships a single icon style ("venetian-mask"). To add more styles
 // later, drop additional <style>/ folders under src/icons/.
@@ -58,6 +68,26 @@ chrome.windows.onRemoved.addListener(refreshIconForFocusedWindow);
 // as the extension wakes up (e.g., after a service-worker idle).
 refreshIconForFocusedWindow();
 
+// ---- Keyboard shortcut: open a hardened private window ------------------
+
+async function openOnboarding() {
+  try {
+    await chrome.tabs.create({ url: chrome.runtime.getURL("onboarding.html") });
+  } catch (err) {
+    console.warn("Go Private Quickly: could not open onboarding —", err);
+  }
+}
+
+chrome.commands.onCommand.addListener(async (command) => {
+  if (command !== "open-hardened") return;
+  const result = await openHardenedSession(buildHardenedSet(await getPrefs()));
+  if (result.ok) {
+    await focusWindow(result.windowId);
+  } else if (result.reason === "not-allowed") {
+    await openOnboarding();
+  }
+});
+
 // ---- First-install onboarding ------------------------------------------
 
 const ONBOARDING_SHOWN_KEY = "onboardingShown";
@@ -72,9 +102,5 @@ chrome.runtime.onInstalled.addListener(async (details) => {
     // If storage is unavailable, still show onboarding — the worst
     // case is the user sees it twice on a future reinstall.
   }
-  try {
-    await chrome.tabs.create({ url: chrome.runtime.getURL("onboarding.html") });
-  } catch (err) {
-    console.warn("Go Private Quickly: could not open onboarding —", err);
-  }
+  await openOnboarding();
 });

@@ -52,7 +52,12 @@ node build.mjs
 - [ ] A setting controlled by **enterprise policy** or **another extension** is
       handled gracefully (the rest still apply), not a crash.
 - [ ] **Privacy Sandbox** toggles (Topics, Ad measurement, Related Website
-      Sets, FLEDGE) are handled correctly (already-protected in incognito).
+      Sets, FLEDGE) are handled correctly: already-protected in incognito, or
+      skipped as unavailable on Chrome versions that removed them.
+- [ ] **Alt+Shift+H** (Option+Shift+H on Mac) opens a focused Hardened
+      window; with incognito access off it opens onboarding and no window.
+- [ ] Hardened button with incognito access off: onboarding opens and **no**
+      private window is left behind.
 - [ ] **Third-party cookies** are handled when the browser already blocks them
       in private mode; existing cookie exceptions are not overridden.
 
