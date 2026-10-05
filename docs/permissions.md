@@ -21,13 +21,15 @@ No host permissions. No `tabs`, `activeTab`, `cookies`, `downloads`,
 > Firefox ships from a separate repository
 > ([goPrivateQuickly-Firefox](https://github.com/DJCastle/goPrivateQuickly-Firefox))
 > and requests `storage` only — Firefox's `BrowserSetting` API has no
-> private-session scope, so it never requests `privacy` and reports each
-> hardened protection as "Unavailable in this browser."
+> private-session scope, so it never requests `privacy` and offers no
+> Hardened Mode.
 
 ## Reviewer note — why each permission is required
 
 - **`storage`** — The only data stored is the user's own preferences (the three
-  advanced Hardened Mode toggles). Total size is well under 1 KB. No browsing
+  advanced Hardened Mode toggles, in `storage.sync` with a `storage.local`
+  fallback) plus an `onboardingShown` flag in `storage.local` so the welcome
+  page opens once. Total size is well under 1 KB. No browsing
   history, URLs, queries, page content, cookies, or identifiers are ever stored.
   Nothing is transmitted.
 
@@ -39,8 +41,8 @@ No host permissions. No `tabs`, `activeTab`, `cookies`, `downloads`,
   live only in the incognito session's memory, an unexpected browser exit cannot
   leave a hardened value behind — a fresh launch always starts from the
   browser's own defaults. The permission is also what lets the extension read
-  `levelOfControl` so it can honestly report when a setting is controlled by
-  enterprise policy or another extension instead of silently failing.
+  `levelOfControl` so it skips, rather than overrides, any setting controlled
+  by enterprise policy or another extension.
 
 ## What Hardened Private Mode never touches
 

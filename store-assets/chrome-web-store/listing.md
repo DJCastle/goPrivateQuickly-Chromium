@@ -17,9 +17,12 @@ _Max 45 chars. Currently: 22._
 
 ## Short description (summary)
 
-> Open a private/incognito window in one click, plus an optional Hardened Mode that tightens privacy for that session only.
+_CWS shows the manifest `description` as the summary; keep this text and
+`manifest.json` `description` identical._
 
-_Max 132 chars. Currently: 119._
+> Open a new private/incognito window with one click, with an optional hardened mode that tightens privacy settings for that session.
+
+_Max 132 chars. Currently: 131._
 
 ## Category
 
@@ -86,11 +89,11 @@ For each permission CWS asks you to justify, paste this:
 
 ### `storage`
 
-> Used solely to persist the user's own settings (the three advanced Hardened Mode privacy toggles) so they survive browser restarts and sync across the user's own devices via the browser's built-in sync. No personal data or browsing data is stored. Storage is `chrome.storage.sync` with a `chrome.storage.local` fallback if sync is unavailable.
+> Used solely to persist the user's own settings (the three advanced Hardened Mode privacy toggles) so they survive browser restarts and sync across the user's own devices via the browser's built-in sync, plus a single onboardingShown flag in chrome.storage.local so the one-time welcome page doesn't re-open. No personal data or browsing data is stored. Settings use `chrome.storage.sync` with a `chrome.storage.local` fallback if sync is unavailable.
 
 ### `privacy`
 
-> Used only by the optional Hardened Private Mode, and only when the user explicitly opens a hardened private window. The extension applies a fixed, documented set of privacy settings (WebRTC IP handling, network prediction, search suggestions, hyperlink auditing, alternate error pages, online spelling service, third-party cookies, and the Topics/Ad-measurement/Protected-Audience advertising APIs where the browser still provides them) using the `incognito_session_only` scope, so the changes apply to the private session only and the browser clears them automatically when the last private window closes. The user's normal-browsing settings are never changed. Security-related settings (Safe Browsing, password manager, certificate/HTTPS/update/download protections, autofill) are never read or modified. The permission also lets the extension read each setting's `levelOfControl` so it can accurately report when a setting is locked by enterprise policy or another extension.
+> Used only by the optional Hardened Private Mode, and only when the user explicitly opens a hardened private window. The extension applies a fixed, documented set of privacy settings (WebRTC IP handling, network prediction, search suggestions, hyperlink auditing, alternate error pages, online spelling service, third-party cookies, and the Topics, Ad-measurement, Related Website Sets and Protected Audience advertising APIs where the browser still provides them), plus two opt-in advanced options the user can enable in Settings (strict WebRTC routing via proxy_only, and disabling referrer headers), using the `incognito_session_only` scope, so the changes apply to the private session only and the browser clears them automatically when the last private window closes. The user's normal-browsing settings are never changed. Security-related settings (Safe Browsing, password manager, certificate/HTTPS/update/download protections, autofill) are never read or modified. The permission also lets the extension read each setting's `levelOfControl` so it skips, rather than overrides, any setting locked by enterprise policy or another extension.
 
 ## Host permission justifications
 
@@ -120,10 +123,15 @@ Three are prepared in this folder (`chrome-1.png`, `chrome-2.png`,
 captions:
 
 1. **chrome-2.png — private window + popup** — Chrome's "You've gone Incognito" tab with the GPQ popup open. Caption: "Click → instant private window. Hardened or Standard, your choice."
-2. **chrome-1.png — Options / Allow in Incognito** — the extension's details/options panel showing Hardened Private Mode and the Allow-in-Incognito step. Caption: "Optional Hardened Mode, plus a one-time setup to allow private windows."
-3. **chrome-3.png — the website + popup** — the popup over the CodeCraftedApps Browser Extensions site. Caption: "Open source, zero tracking, zero network requests."
+2. **chrome-3.png — Options** — the Settings page with Advanced expanded, showing the greyed-out "Disable WebRTC entirely". Caption: "Optional Hardened Mode with opt-in advanced settings."
+3. **chrome-1.png — the website + popup** — the popup over the CodeCraftedApps GPQ page. Caption: "Open source, zero tracking, zero network requests."
+4. **chrome-4.png — keyboard shortcut** — the welcome page, or `chrome://extensions/shortcuts` showing Alt+Shift+H. Caption: "Alt+Shift+H opens a Hardened window without the popup."
 
-_You can also include a single 440×280 "promotional tile" PNG._
+Screenshots: full-bleed window content, square corners, no padding or
+shadow. Capture from the store build (not Developer mode / unpacked).
+
+**Small promo tile (440×280) is required by CWS.** Keep a copy in this
+folder as `promo-small.png`.
 
 ## Promo video (optional, recommended)
 

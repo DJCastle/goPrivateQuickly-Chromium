@@ -14,9 +14,10 @@
 
 ## What it does
 
-Click the toolbar icon → a popup with two choices: **Open Private
-Window** (a normal private/incognito window, nothing else changed) or
-**Open Hardened Private Window**. That's the core idea.
+Click the toolbar icon → a popup with two choices: **Standard
+Private Window** (a normal private/incognito window, nothing else changed)
+or **Open Hardened Private Window**. Alt+Shift+H (Option+Shift+H on Mac)
+opens a Hardened window without the popup. That's the core idea.
 
 **Hardened Private Mode** opens a private window and tightens supported
 privacy settings for that private session only — WebRTC IP protection,
@@ -47,7 +48,7 @@ GPQ is a convenience tool, not a privacy product. It does not:
 - Block trackers, ads, or fingerprinting.
 - Clear cookies or history from your normal windows.
 - Sync settings to a "GPQ account" — there is no such thing. The only
-  syncing is your browser's own (Chrome sync, Firefox Sync, etc.).
+  syncing is your browser's own (Chrome sync, Brave Sync, etc.).
 - Connect to the internet for any reason. There are no `fetch` or
   `XMLHttpRequest` calls anywhere in the source.
 
@@ -97,7 +98,7 @@ installed software. Full justification lives in
 | Setting | What it does | Default |
 | --- | --- | --- |
 | Advanced: strict WebRTC routing (`proxy_only`) | Stricter WebRTC; may break calls/meetings | Off |
-| Advanced: disable WebRTC entirely | Where supported; may break real-time communication | Off |
+| Advanced: disable WebRTC entirely | Not available on Chromium (no API for it); shown greyed out | Off |
 | Advanced: disable referrer headers | Where supported; may break some sites/sign-in/payment | Off |
 
 All three advanced toggles are off by default; each is labeled with its

@@ -1,13 +1,14 @@
 # Privacy Policy — Go Private Quickly (GPQ)
 
-**Last updated:** May 30, 2026
+**Last updated:** October 5, 2026
 
 ## The short version
 
 Go Private Quickly does not collect, store, transmit, sell, share, or
 otherwise process any personal data. No analytics. No tracking. No
-telemetry. No network requests at all. The only thing it remembers is
-your own settings, and those live exclusively in your browser.
+telemetry. No network requests at all. The only things it remembers are
+your own settings and a welcome-page flag, kept in your browser's own
+extension storage.
 
 If you're the kind of person who only reads the short version, you're
 done. Thanks for caring about privacy.
@@ -20,10 +21,11 @@ extension. The only thing GPQ needs to remember between sessions is your
 own on/off preferences for the three optional Hardened Mode advanced
 toggles — nothing about what you browse.
 
-That preference is stored using `chrome.storage.sync` (with a fallback
-to `chrome.storage.local` if your browser sync is unavailable). It
-never leaves your device, never leaves your browser, and never reaches
-me or anyone else.
+Those preferences are stored using `chrome.storage.sync` (with a
+fallback to `chrome.storage.local` if your browser sync is unavailable).
+GPQ itself never sends them anywhere and they never reach me or anyone
+else; if you use your browser's sync, your browser carries them between
+your own devices (see below).
 
 ## What we collect
 
@@ -43,15 +45,15 @@ These three are the **Hardened Private Mode** advanced toggles. They record
 only your own on/off preferences for the advanced privacy options. They never
 describe anything you browse.
 
-If you've signed into your browser's sync (Chrome sync, Firefox Sync,
-etc.) these settings travel with you between your own devices. That
+If you've signed into your browser's sync (Chrome sync, Brave Sync,
+Edge sync, etc.) these settings travel with you between your own devices. That
 sync happens through your browser vendor's infrastructure (Google,
-Mozilla, etc.), under their privacy policies, not mine. GPQ doesn't
+Microsoft, etc.), under their privacy policies, not mine. GPQ doesn't
 operate or have access to those servers.
 
 There's also one tiny key in `chrome.storage.local` called
-`onboardingShown`, which is just a flag so the welcome page doesn't
-re-open every time you reload the extension during development.
+`onboardingShown`, which is just a flag so the one-time welcome page
+doesn't re-open.
 
 ## What we transmit
 
@@ -85,12 +87,12 @@ On **Chromium browsers** (Chrome, Edge, Brave, Vivaldi, etc.), two:
   scope, so they affect the private session alone and the browser clears
   them automatically when the last private window closes. GPQ never
   changes your normal-browsing privacy settings. The `privacy` permission
-  also lets GPQ read each setting's level of control, so it can tell whether
-  a protection was applied, already on, unavailable, or blocked by policy or
-  another extension — instead of silently failing.
+  also lets GPQ read each setting's level of control, so it skips any
+  setting that enterprise policy or another extension controls instead of
+  trying to override it.
   Firefox does not offer a private-session scope for these settings, so
-  GPQ does not request `privacy` there and reports each protection as
-  unavailable rather than changing your global configuration.
+  the Firefox build does not request `privacy` and offers no Hardened
+  Mode, rather than changing your global configuration.
 
 GPQ does not request, and does not have access to:
 
