@@ -70,7 +70,6 @@ Works on Chrome and every Chromium browser — Brave, Microsoft Edge, Arc, and V
 
 Open source under the MIT License: https://github.com/DJCastle/goPrivateQuickly-Chromium
 Questions or problems: support@codecraftedapps.com
-Source: https://github.com/DJCastle/goPrivateQuickly-Chromium
 Privacy Policy: https://codecraftedapps.com/extensions/go-private-quickly/privacy.html
 Terms of Use: https://codecraftedapps.com/extensions/go-private-quickly/terms.html
 ```
