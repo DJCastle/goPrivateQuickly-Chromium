@@ -85,7 +85,7 @@ _Max 1,000 chars. Currently: 265._
 ## Permission justifications
 
 The only permission is `storage`. If the dashboard still lists a `privacy`
-justification from 1.2.0, clear it — 1.2.1 no longer requests `privacy`.
+justification from 1.2.0, clear it — 1.3.0 no longer requests `privacy`.
 
 ### `storage`
 
@@ -116,9 +116,9 @@ Privacy Policy URL (required field):
 
 ## Screenshots — 1280×800 PNG (exactly)
 
-**Recapture before submitting 1.2.1.** The three files in this folder
+**Recapture before submitting 1.3.0.** The three files in this folder
 (`chrome-1.png`, `chrome-2.png`, `chrome-3.png`) are from 1.2.0 and show the
-removed popup and settings page. Replace them with 1.2.1 captures, in this
+removed popup and settings page. Replace them with 1.3.0 captures, in this
 order:
 
 1. **chrome-1.png — private window** — Chrome's "You've gone Incognito" tab with the silver GPQ mask in the toolbar. Caption: "One click → a new incognito window. No popup, no menu."

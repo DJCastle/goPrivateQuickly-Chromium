@@ -6,7 +6,7 @@ build. Requirements checked against Microsoft's "Publish a Microsoft Edge
 extension" doc (updated 2026-09-02).
 
 **Store identity** (Partner Center › Extension overview; 1.2.0 submitted
-2026-10-06, unpublished pending the 1.2.1 review):
+2026-10-06, unpublished pending the 1.3.0 review):
 
 - Store ID: `0RDCKCF7R29J`
 - CRX ID: `hkkldegnjfeijmpekiklijglmfkaniop` — differs from the Chrome Web Store
@@ -41,7 +41,7 @@ Partner Center.
 
 > Used solely to store a single onboardingShown flag in chrome.storage.local, so the one-time welcome page that explains how to allow the extension in InPrivate opens only once, on first install. No settings, personal data, or browsing data (URLs, history, tabs, page content) are stored, and nothing is synced or transmitted.
 
-The `privacy` permission is no longer requested as of 1.2.1. If Partner Center
+The `privacy` permission is no longer requested as of 1.3.0. If Partner Center
 still shows a `privacy` justification field from 1.2.0, clear it.
 
 **Are you using remote code?** No, I am not using remote code.
@@ -91,7 +91,7 @@ from the original artwork would look sharper.
 
 **Screenshots** (optional, up to 6, 640×480 or 1280×800): don't reuse the
 current Chrome set in `../chrome-web-store/` — it is from 1.2.0 and shows the
-removed popup and settings page. Use 1.2.1 Edge captures (an InPrivate window
+removed popup and settings page. Use 1.3.0 Edge captures (an InPrivate window
 with the silver mask; the welcome page showing "Allow in InPrivate"), or skip
 screenshots until they exist.
 

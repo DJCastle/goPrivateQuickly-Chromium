@@ -5,7 +5,7 @@ All notable changes to this extension are documented in this file.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Version scheme: [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.2.1] — 2026-10-07
+## [1.3.0] — 2026-10-07
 
 ### Removed
 
@@ -108,7 +108,7 @@ First public release.
   no remote code. Chromium requests `storage` and `privacy`; Firefox requests
   only `storage`. Strict Content Security Policy.
 
-[1.2.1]: https://github.com/DJCastle/goPrivateQuickly-Chromium/releases/tag/gpq-v1.2.1
+[1.3.0]: https://github.com/DJCastle/goPrivateQuickly-Chromium/releases/tag/gpq-v1.3.0
 [1.2.0]: https://github.com/DJCastle/goPrivateQuickly-Chromium/releases/tag/gpq-v1.2.0
 [1.1.5]: https://github.com/DJCastle/goPrivateQuickly-Chromium/releases/tag/gpq-v1.1.5
 [1.0.0]: https://github.com/DJCastle/goPrivateQuickly-Chromium/releases/tag/gpq-v1.0.0

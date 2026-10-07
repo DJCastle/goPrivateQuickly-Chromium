@@ -17,7 +17,7 @@ No host permissions. No `tabs`, `activeTab`, `cookies`, `downloads`,
 `bookmarks`, `history`, `management`, `privacy`, `proxy`, `webRequest`,
 `declarativeNetRequest`, `nativeMessaging`, or clipboard permissions.
 
-The `privacy` permission was removed in 1.2.1 together with Hardened Private
+The `privacy` permission was removed in 1.3.0 together with Hardened Private
 Mode. The extension now changes no browser settings — it only opens private
 windows, one click from the toolbar, the same as the
 [Firefox build](https://github.com/DJCastle/goPrivateQuickly-Firefox).

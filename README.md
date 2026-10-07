@@ -7,7 +7,7 @@
 > Firefox build:
 > [goPrivateQuickly-Firefox](https://github.com/DJCastle/goPrivateQuickly-Firefox).
 
-![Version](https://img.shields.io/badge/version-1.2.1-blue)
+![Version](https://img.shields.io/badge/version-1.3.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Manifest](https://img.shields.io/badge/manifest-v3-orange)
 ![Privacy](https://img.shields.io/badge/data%20collection-zero-brightgreen)
@@ -23,7 +23,7 @@ private — a vivid purple-and-gold mask when you're in a normal window, a
 muted silver mask when you're in a private (secure) one.
 
 GPQ changes no browser settings. Earlier versions offered an optional
-Hardened Private Mode; it was removed in 1.2.1 (see the
+Hardened Private Mode; it was removed in 1.3.0 (see the
 [changelog](CHANGELOG.md)), along with the popup, the settings page and
 the `privacy` permission.
 
@@ -54,7 +54,7 @@ those.
 - **Microsoft Edge**: also listed on
   [Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/hkkldegnjfeijmpekiklijglmfkaniop).
 
-Both store listings are being updated to 1.2.1 and may be temporarily
+Both store listings are being updated to 1.3.0 and may be temporarily
 unavailable while it is in review.
 
 Using Firefox? It's a separate package —
