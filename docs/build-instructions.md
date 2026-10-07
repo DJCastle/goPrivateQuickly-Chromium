@@ -7,8 +7,9 @@ Go Private Quickly ships from a tiny, **zero-dependency** build step.
 `build.mjs` is a short Node script using only Node built-ins (`node:fs`,
 `node:path`, `node:url`, `node:zlib`). It does one thing:
 
-1. Copies `src/` verbatim into `dist/chromium/` and drops the repo-root
-   `manifest.json` at `dist/chromium/manifest.json`.
+1. Copies `src/` verbatim into `dist/chromium/` (skipping any macOS
+   `.DS_Store` files) and drops the repo-root `manifest.json` at
+   `dist/chromium/manifest.json`.
 
 There is **no transpilation, bundling, minification, or obfuscation**. The
 JavaScript and CSS in `dist/` are byte-for-byte the files in `src/`, and the
@@ -30,13 +31,15 @@ node build.mjs --zip      # also writes dist/chromium.zip (manifest at zip root)
 
 Output:
 
-- `dist/chromium/` — the Chrome Web Store package contents
-- `dist/chromium.zip` — the same, zipped for upload (with `--zip`)
+- `dist/chromium/` — the package contents
+- `dist/chromium.zip` — the same, zipped for upload (with `--zip`). The same
+  zip goes to the Chrome Web Store and Microsoft Edge Add-ons.
 
 ## Verifying the source matches the package
 
 Every file in the uploaded package exists unchanged under `src/`, plus the
-repo-root `manifest.json`. Reviewers can diff `dist/chromium/` against `src/` +
+repo-root `manifest.json`. The only files left out are `.DS_Store` files, which
+Finder may create locally and which are gitignored. Reviewers can diff `dist/chromium/` against `src/` +
 `manifest.json` to confirm; nothing is transformed.
 
 ## Tests
@@ -45,8 +48,9 @@ repo-root `manifest.json`. Reviewers can diff `dist/chromium/` against `src/` +
 node --test
 ```
 
-Runs the zero-dependency unit tests in `test/` covering the hardened-setting
-builder and the Chromium privacy adapter.
+Runs the zero-dependency unit tests in `test/`, which cover the toolbar-click
+path in `src/launch.js` (one incognito window is opened; a refused window
+reports failure instead of throwing) with a mocked `chrome`.
 
 ## Source of truth
 

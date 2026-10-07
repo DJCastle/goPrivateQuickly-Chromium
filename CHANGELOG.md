@@ -5,6 +5,34 @@ All notable changes to this extension are documented in this file.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Version scheme: [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.1] — 2026-10-07
+
+### Removed
+
+- **Hardened Private Mode, the popup and the settings page.** Hardened mode
+  could fail silently: for some users clicking it did nothing visible, with no
+  window and no explanation. Rather than keep a feature that looked like it
+  worked when it didn't, the Chromium build now does one thing, the same way
+  the Firefox build does. Gone with it: the Alt+Shift+H shortcut, the three
+  advanced toggles, and every use of `chrome.privacy`.
+- **The `privacy` permission.** GPQ now requests `storage` only, used for a
+  single `onboardingShown` flag in `chrome.storage.local`. The old
+  advanced-toggle preferences are no longer read or written.
+
+### Changed
+
+- **One click opens a private window directly.** Clicking the toolbar icon
+  opens a new incognito window right away, with no popup in between. If the
+  browser refuses (GPQ not yet allowed in incognito), the click opens the
+  welcome page instead of failing silently.
+- **The welcome page speaks Edge.** On Microsoft Edge it says "Allow in
+  InPrivate" and opens `edge://extensions`; on other Chromium browsers it says
+  "Allow in Incognito" and opens `chrome://extensions`.
+
+### Fixed
+
+- The build no longer copies Finder's `.DS_Store` files into the package.
+
 ## [1.2.0] — 2026-10-05
 
 ### Added
@@ -80,5 +108,7 @@ First public release.
   no remote code. Chromium requests `storage` and `privacy`; Firefox requests
   only `storage`. Strict Content Security Policy.
 
+[1.2.1]: https://github.com/DJCastle/goPrivateQuickly-Chromium/releases/tag/gpq-v1.2.1
+[1.2.0]: https://github.com/DJCastle/goPrivateQuickly-Chromium/releases/tag/gpq-v1.2.0
 [1.1.5]: https://github.com/DJCastle/goPrivateQuickly-Chromium/releases/tag/gpq-v1.1.5
 [1.0.0]: https://github.com/DJCastle/goPrivateQuickly-Chromium/releases/tag/gpq-v1.0.0

@@ -7,36 +7,25 @@
 > Firefox build:
 > [goPrivateQuickly-Firefox](https://github.com/DJCastle/goPrivateQuickly-Firefox).
 
-![Version](https://img.shields.io/badge/version-1.2.0-blue)
+![Version](https://img.shields.io/badge/version-1.2.1-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Manifest](https://img.shields.io/badge/manifest-v3-orange)
 ![Privacy](https://img.shields.io/badge/data%20collection-zero-brightgreen)
 
 ## What it does
 
-Click the toolbar icon → a popup with two choices: **Standard
-Private Window** (a normal private/incognito window, nothing else changed)
-or **Open Hardened Private Window**. Alt+Shift+H (Option+Shift+H on Mac)
-opens a Hardened window without the popup. That's the core idea.
-
-**Hardened Private Mode** opens a private window and tightens supported
-privacy settings for that private session only — WebRTC IP protection,
-network prediction, search suggestions, hyperlink auditing, third-party
-cookies, and Chrome's advertising APIs (Topics, Ad measurement, Protected
-Audience) on browsers that still have them — Google is retiring those APIs,
-so newer Chrome versions simply skip them. The browser restores everything
-automatically when the last private window closes; your normal browsing
-settings are never changed and security protections are never touched.
-Optional advanced toggles (strict WebRTC routing, no referrer headers) are
-off by default.
-
-A keyboard shortcut, **Alt+Shift+H** (**Option+Shift+H** on Mac), opens a
-Hardened window directly. Change it in your browser's extension shortcuts
-settings.
+Click the toolbar icon and a new private/incognito window opens right
+away. One click, straight from your toolbar, with no popup in between.
+That's the whole idea — and it works the same way as the Firefox build.
 
 The toolbar icon also reflects whether the currently focused window is
 private — a vivid purple-and-gold mask when you're in a normal window, a
 muted silver mask when you're in a private (secure) one.
+
+GPQ changes no browser settings. Earlier versions offered an optional
+Hardened Private Mode; it was removed in 1.2.1 (see the
+[changelog](CHANGELOG.md)), along with the popup, the settings page and
+the `privacy` permission.
 
 ## What it does NOT do
 
@@ -61,7 +50,12 @@ those.
 ## Install
 
 - **Chromium browsers** (Chrome, Brave, Edge, Arc, Vivaldi):
-  install from the [Chrome Web Store](https://chromewebstore.google.com/detail/binihpnpginmnaodjalkhakakdhhjkkl).
+  the [Chrome Web Store](https://chromewebstore.google.com/detail/binihpnpginmnaodjalkhakakdhhjkkl).
+- **Microsoft Edge**: also listed on
+  [Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/hkkldegnjfeijmpekiklijglmfkaniop).
+
+Both store listings are being updated to 1.2.1 and may be temporarily
+unavailable while it is in review.
 
 Using Firefox? It's a separate package —
 [goPrivateQuickly-Firefox](https://github.com/DJCastle/goPrivateQuickly-Firefox).
@@ -75,17 +69,23 @@ By browser security policy, extensions can't enable themselves in
 private/incognito mode. The first time you install GPQ it opens a
 welcome page that walks you through the one-time toggle:
 
-- `chrome://extensions/?id=binihpnpginmnaodjalkhakakdhhjkkl` → switch on **Allow in Incognito**.
+- Chrome, Brave, Arc, Vivaldi: `chrome://extensions` → Go Private Quickly →
+  Details → switch on **Allow in Incognito**.
+- Edge: `edge://extensions` → Go Private Quickly → Details → switch on
+  **Allow in InPrivate**. (The welcome page detects Edge and uses its wording.)
+
+If you click the icon before flipping that switch, the browser refuses
+to open the window and GPQ opens the welcome page instead.
 
 Without that toggle, GPQ can technically run from a normal window but
 can't open private ones on your behalf.
 
 ## Permissions
 
-`"storage"` plus `"privacy"`. The `privacy` permission is used only by
-Hardened Private Mode, and only to apply privacy-hardening to the private
-session you explicitly open (with the `incognito_session_only` scope, so it
-never changes normal browsing).
+Only `"storage"` — used solely to remember that you've already seen the
+one-time welcome page (a single `onboardingShown` flag in
+`chrome.storage.local`). GPQ changes no browser settings and does not
+request `privacy`.
 
 GPQ does not request and does not have access to your tabs, history,
 cookies, bookmarks, downloads, any specific websites, or any VPN/other
@@ -95,14 +95,8 @@ installed software. Full justification lives in
 
 ## Settings
 
-| Setting | What it does | Default |
-| --- | --- | --- |
-| Advanced: strict WebRTC routing (`proxy_only`) | Stricter WebRTC; may break calls/meetings | Off |
-| Advanced: disable WebRTC entirely | Not available on Chromium (no API for it); shown greyed out | Off |
-| Advanced: disable referrer headers | Where supported; may break some sites/sign-in/payment | Off |
-
-All three advanced toggles are off by default; each is labeled with its
-trade-off.
+None. GPQ has no popup and no settings page — it does one thing, one
+click, with nothing to configure.
 
 ## Browser support
 

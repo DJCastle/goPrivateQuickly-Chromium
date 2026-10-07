@@ -11,15 +11,21 @@
 // the browser, but an extension may open it itself via chrome.tabs.create.
 // We try that on the button click and only reveal the copy-paste fallback if
 // it throws (some browsers refuse to open internal pages this way).
-//   chrome://extensions/?id=<our id> lands on GPQ's Details page; the id is the
-//   same for every user once published, and is filled in from chrome.runtime.id
-//   so it's always correct.
+//   <scheme>://extensions/?id=<our id> lands on GPQ's Details page. The id is
+//   filled in from chrome.runtime.id, so it's right in every store (Chrome Web
+//   Store and Edge Add-ons assign different ids).
+//
+// Edge names things differently: its pages live under edge:// and the toggle is
+// "Allow in InPrivate". Edge's user agent carries "Edg/"; every other Chromium
+// browser uses Chrome's wording.
 
-const SETTINGS_URL = `chrome://extensions/?id=${chrome.runtime.id}`;
-const OPEN_BUTTON_TEXT = "Open Allow in Incognito setting";
+const IS_EDGE = navigator.userAgent.includes("Edg/");
+const TOGGLE_NAME = IS_EDGE ? "Allow in InPrivate" : "Allow in Incognito";
+const SETTINGS_URL = `${IS_EDGE ? "edge" : "chrome"}://extensions/?id=${chrome.runtime.id}`;
+const OPEN_BUTTON_TEXT = `Open ${TOGGLE_NAME} setting`;
 const TOGGLE_STEP_TEXT =
   "On the page that opens (Go Private Quickly's details), scroll down to " +
-  "about the middle and switch on \"Allow in Incognito.\"";
+  `about the middle and switch on "${TOGGLE_NAME}."`;
 
 const pendingEl = document.getElementById("permission-pending");
 const grantedEl = document.getElementById("permission-granted");
@@ -29,7 +35,6 @@ const manualFallbackEl = document.getElementById("manual-fallback");
 const urlEl = document.getElementById("settings-url");
 const copyBtn = document.getElementById("copy-url");
 const recheckBtn = document.getElementById("recheck");
-const optionsBtn = document.getElementById("open-options");
 const stepToggleEl = document.getElementById("step-toggle");
 
 openPageBtn.textContent = OPEN_BUTTON_TEXT;
@@ -83,13 +88,5 @@ copyBtn.addEventListener("click", async () => {
 });
 
 recheckBtn.addEventListener("click", refreshPermissionStatus);
-
-optionsBtn.addEventListener("click", () => {
-  if (chrome.runtime.openOptionsPage) {
-    chrome.runtime.openOptionsPage();
-  } else {
-    chrome.tabs.create({ url: chrome.runtime.getURL("options.html") });
-  }
-});
 
 refreshPermissionStatus();

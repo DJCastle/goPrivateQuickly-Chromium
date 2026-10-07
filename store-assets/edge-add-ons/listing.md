@@ -5,8 +5,8 @@ Upload the same `dist/chromium.zip` as the Chrome Web Store — no Edge-specific
 build. Requirements checked against Microsoft's "Publish a Microsoft Edge
 extension" doc (updated 2026-09-02).
 
-**Store identity** (Partner Center › Extension overview; submitted 1.2.0 on
-2026-10-06):
+**Store identity** (Partner Center › Extension overview; 1.2.0 submitted
+2026-10-06, unpublished pending the 1.2.1 review):
 
 - Store ID: `0RDCKCF7R29J`
 - CRX ID: `hkkldegnjfeijmpekiklijglmfkaniop` — differs from the Chrome Web Store
@@ -33,17 +33,16 @@ Partner Center.
 
 ## Privacy
 
-**Single Purpose Description**
+**Single Purpose Description** (259 chars)
 
-> Go Private Quickly's single purpose is to open a private (InPrivate) browser window from the toolbar, with an optional Hardened Private Mode that applies privacy-hardening settings to that private session only. The extension does not perform any other function.
+> Go Private Quickly's single purpose is to open a new InPrivate browser window when the user clicks its toolbar icon. The toolbar icon also shows whether the focused window is InPrivate. The extension changes no browser settings and performs no other function.
 
-**Permission justification — `storage`**
+**Permission justification — `storage`** (324 chars)
 
-> Used solely to persist the user's own settings (the advanced Hardened Mode privacy toggles) so they survive browser restarts, plus a single onboardingShown flag so the one-time welcome page doesn't re-open. No personal data or browsing data is stored.
+> Used solely to store a single onboardingShown flag in chrome.storage.local, so the one-time welcome page that explains how to allow the extension in InPrivate opens only once, on first install. No settings, personal data, or browsing data (URLs, history, tabs, page content) are stored, and nothing is synced or transmitted.
 
-**Permission justification — `privacy`** (890 chars)
-
-> Used only by the optional Hardened Private Mode, and only when the user opens a hardened InPrivate window. It applies a fixed, documented set of privacy settings (WebRTC IP handling, network prediction, search suggestions, hyperlink auditing, alternate error pages, online spelling service, third-party cookies, and advertising APIs where available), plus two opt-in advanced options (strict WebRTC routing, disabling referrer headers), all with the incognito_session_only scope, so they apply to the InPrivate session only and the browser clears them when the last InPrivate window closes. Normal browsing settings are never changed. Security settings (SmartScreen/Safe Browsing, password manager, certificate/HTTPS/update/download protections, autofill) are never read or modified. It also reads each setting's levelOfControl so it skips any setting locked by policy or another extension.
+The `privacy` permission is no longer requested as of 1.2.1. If Partner Center
+still shows a `privacy` justification field from 1.2.0, clear it.
 
 **Are you using remote code?** No, I am not using remote code.
 
@@ -53,30 +52,28 @@ Partner Center.
 
 ## Store listing — English (United States)
 
-**Description** (Edge requires 250–10,000 characters)
+**Description** (Edge requires 250–10,000 characters; currently 2027)
 
 ```
-Go Private Quickly does one small thing and tries to do it well: it puts a button in your toolbar that opens a new InPrivate window. Click the icon, click the button, you're private. That's the whole idea.
+Go Private Quickly does one small thing and tries to do it well: it puts a button in your toolbar that opens a new InPrivate window. Click the icon, you're private. That's the whole idea.
 
 I built it because I open private windows all day and wanted it to be one click instead of a trip through a menu, and because I wanted something that stayed out of the way and didn't quietly phone home. This one never connects to the internet at all.
 
 WHAT YOU GET
-- One click to a new InPrivate window, straight from the toolbar.
-- A toolbar icon that quietly shows whether the window you're in is private.
-- An optional "Hardened" mode that opens an InPrivate window and tightens a set of privacy settings for that session only: WebRTC IP protection, network prediction, search suggestions, hyperlink auditing, third-party cookies, and more. Edge puts them all back automatically when the last InPrivate window closes, so your normal browsing is never changed, and security protections (SmartScreen, your password manager, certificate/HTTPS checks, updates) are never touched.
-- A keyboard shortcut (Alt+Shift+H, or Option+Shift+H on Mac) that opens a Hardened window directly.
-- A few optional Advanced toggles for power users (stricter WebRTC routing, disabling referrer headers), off by default, each clearly labeled with its trade-off.
+- One click to a new InPrivate window, straight from the toolbar. No popup, no menu, nothing to configure.
+- A toolbar icon that quietly shows whether the window you're in is private: a muted silver mask in an InPrivate window, full color everywhere else.
+- If Edge hasn't allowed GPQ in InPrivate yet, the click opens a short setup page instead of doing nothing.
 
 WHAT IT HONESTLY DOES NOT DO
 - It's not a VPN. Your network, ISP, employer, or school can still see the sites you visit.
 - It doesn't hide your IP, block ads or trackers, or make you anonymous.
-- It doesn't touch your normal browsing or clear anything.
+- It doesn't change any browser settings, touch your normal browsing, or clear anything.
 
 PRIVACY, FOR REAL
 - No data collection. None.
 - No analytics, no telemetry, no error reporting.
 - Zero network requests. The extension never connects to the internet.
-- Two permissions, both minimal: "storage" (remembers your own settings) and "privacy" (used only to apply the hardening to the InPrivate session you open, never to your normal browsing).
+- One permission: "storage," used only to remember that you've seen the one-time welcome page. There are no settings to store.
 - No third-party code, no CDNs, no remote scripts. It's open source, so you can read every line.
 
 ONE-TIME SETUP
@@ -92,9 +89,11 @@ Terms of Use: https://codecraftedapps.com/extensions/go-private-quickly/terms.ht
 `src/icons/venetian-mask/icon-128.png` meets the minimum. A 300×300 export
 from the original artwork would look sharper.
 
-**Screenshots** (optional, up to 6, 640×480 or 1280×800): the Chrome set in
-`../chrome-web-store/` is 1280×800 and accepted, but shows Chrome. Edge
-captures would be better.
+**Screenshots** (optional, up to 6, 640×480 or 1280×800): don't reuse the
+current Chrome set in `../chrome-web-store/` — it is from 1.2.0 and shows the
+removed popup and settings page. Use 1.2.1 Edge captures (an InPrivate window
+with the silver mask; the welcome page showing "Allow in InPrivate"), or skip
+screenshots until they exist.
 
 **Small promotional tile** (optional, 440×280) and **large promotional tile**
 (optional, 1400×560): none prepared.
@@ -106,9 +105,9 @@ captures would be better.
 ## Notes for certification
 
 ```
-Single-purpose extension: one click opens a new InPrivate window. Optional Hardened mode applies documented privacy settings with the incognito_session_only scope, so they affect only the InPrivate session and are cleared by the browser when it closes.
+Single-purpose extension: one click on the toolbar icon opens a new InPrivate window. There is no popup and no settings page. The extension changes no browser settings; its only permission is "storage", used for a single onboardingShown flag.
 
-To test Hardened mode: install, allow the extension in InPrivate when the welcome page asks (edge://extensions → Details → Allow in InPrivate), then click the toolbar icon and choose Hardened. Without that permission, Hardened shows the setup page and opens nothing.
+To test: install, then allow the extension in InPrivate when the welcome page asks (edge://extensions > Go Private Quickly > Details > Allow in InPrivate). Click the toolbar icon: a new InPrivate window opens. Before that permission is granted, the click opens the welcome page instead, and no window is opened.
 
 No network requests, no remote code, no host permissions, no content scripts. Unminified source matching this package: https://github.com/DJCastle/goPrivateQuickly-Chromium (built by build.mjs, which copies src/ without transforming it).
 ```

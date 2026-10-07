@@ -28,7 +28,11 @@ async function build() {
   const outDir = join(DIST, TARGET);
   await rm(outDir, { recursive: true, force: true });
   await mkdir(outDir, { recursive: true });
-  await cp(SRC, outDir, { recursive: true });
+  // Finder drops .DS_Store files into any folder it opens; never ship them.
+  await cp(SRC, outDir, {
+    recursive: true,
+    filter: (from) => !from.endsWith(`${sep}.DS_Store`),
+  });
   await cp(join(HERE, "manifest.json"), join(outDir, "manifest.json"));
   console.log(`Built dist/${TARGET}/`);
 }

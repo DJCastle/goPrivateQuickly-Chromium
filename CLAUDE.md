@@ -6,8 +6,9 @@ Shared craft rules — imported so every surface loads them, including Xcode's s
 
 ## Stack & purpose
 
-Standalone **Chromium** build of Go Private Quickly (GPQ): one-click
-private/incognito windows with an optional Hardened Private Mode. Manifest V3,
+Standalone **Chromium** build of Go Private Quickly (GPQ): one click on the
+toolbar icon opens a private/incognito window — no popup, no settings page,
+same behavior as the Firefox build. Manifest V3,
 vanilla JS only — no bundler, no framework, no TypeScript. The Firefox build is
 a separate repo (`goPrivateQuickly-Firefox`); the public website lives in
 `codeCraftedApps` at `codecraftedapps.com/extensions/`.
@@ -21,6 +22,10 @@ a separate repo (`goPrivateQuickly-Firefox`); the public website lives in
   copy. Don't reintroduce it to the browser lists.)
 - **Distribution:** Chrome Web Store, plus Microsoft Edge Add-ons from
   1.2.0 (same `dist/chromium.zip`; copy in `store-assets/edge-add-ons/`).
+  Both listings are unpublished pending the 1.2.1 review.
+- **Hardened Private Mode was removed in 1.2.1** (with the popup, settings
+  page, Alt+Shift+H and the `privacy` permission): it failed silently for
+  users. Don't reintroduce it without the owner's explicit decision.
 - **History:** split out of the `DJCastle/browserExtensions` monorepo on
   2026-06-07. One-repo-per-base-browser is the standard for independent extensions; shared-engine products use a per-product monorepo (workspace decision, amended 2026-07-11).
 
@@ -28,11 +33,12 @@ a separate repo (`goPrivateQuickly-Firefox`); the public website lives in
 
 ```text
 manifest.json          the manifest (no base/overlay split anymore)
-src/                   all source (Chromium adapter only)
+src/                   background.js (service worker: click, icon, onboarding),
+                       launch.js (openPrivateWindow), onboarding.*, theme.css, icons/
 build.mjs              zero-dep Node build → dist/chromium/ (+ dist/chromium.zip with --zip)
 test/                  node --test unit tests
 tools/                 icon generator + sources
-store-assets/chrome-web-store/
+store-assets/          chrome-web-store/ and edge-add-ons/ listing copy
 docs/                  reviewer/dev docs (build, permissions, testing, submission)
 README.md PRIVACY.md TERMS.md CHANGELOG.md LICENSE
 ```
@@ -56,7 +62,8 @@ README.md PRIVACY.md TERMS.md CHANGELOG.md LICENSE
 1. **No analytics, telemetry, error reporting, or crash reporting.** Ever.
 2. **No remote code loading or execution.** All code ships in the package.
 3. **No host permissions, no `tabs`, no `activeTab`** unless genuinely needed.
-   Current permissions: `["storage", "privacy"]` only.
+   Current permissions: `["storage"]` only (one `onboardingShown` flag in
+   `chrome.storage.local`). No `privacy` — GPQ changes no browser settings.
 4. **No `eval()`, no `new Function()`, no inline event handlers.**
 5. **No content scripts** — GPQ needs no DOM access on real pages.
 6. **No bundler, no TypeScript, no framework.** Vanilla JS, single source tree.
@@ -66,8 +73,14 @@ README.md PRIVACY.md TERMS.md CHANGELOG.md LICENSE
 
 - `manifest.json` is the single source of truth (no more base+overlay merge).
 - `chrome.*` namespace throughout; each source file under ~150 lines.
-- No state in service-worker module scope (MV3 idles the worker) — re-read from
-  `chrome.storage` on every event.
+- No state in service-worker module scope (MV3 idles the worker) — re-derive
+  from the browser (or `chrome.storage`) on every event.
+- Toolbar click runs in the service worker (`chrome.action.onClicked`), never a
+  popup; if `windows.create({ incognito: true })` throws, open onboarding.
+- Edge wording: onboarding detects `Edg/` in the UA → "Allow in InPrivate" +
+  `edge://extensions`; elsewhere "Allow in Incognito" + `chrome://extensions`.
+  Store copy follows suit (Edge listing says InPrivate).
+- `build.mjs` skips `.DS_Store`; everything else in `src/` ships unchanged.
 - Don't add `web_accessible_resources` unless a feature truly needs it.
 
 ## Known issues / don't reintroduce
@@ -77,8 +90,6 @@ README.md PRIVACY.md TERMS.md CHANGELOG.md LICENSE
   instance is already running — only on cold profile launch.
 - **Default-disabled in incognito.** Users enable per-extension in
   `chrome://extensions`; onboard via `chrome.extension.isAllowedIncognitoAccess()`.
-- **`chrome.storage.sync` quota** (~100KB/8KB per item) — settings are tiny,
-  but fall back to `chrome.storage.local` on quota error.
 
 ## Cross-repo sync
 

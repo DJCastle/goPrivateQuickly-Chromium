@@ -11,45 +11,38 @@ Arc).
 
 | Permission | Required for | Notes |
 | --- | --- | --- |
-| `storage` | Saving the user's own settings | `chrome.storage.sync` with `chrome.storage.local` fallback. No browsing data. |
-| `privacy` | Hardened Private Mode | Reads each setting's value + `levelOfControl`, then applies it with `scope: "incognito_session_only"`. Used only when the user opens a hardened window. |
+| `storage` | Remembering the welcome page was shown | A single `onboardingShown` flag in `chrome.storage.local`. No settings, no browsing data. |
 
 No host permissions. No `tabs`, `activeTab`, `cookies`, `downloads`,
-`bookmarks`, `history`, `management`, `proxy`, `webRequest`,
+`bookmarks`, `history`, `management`, `privacy`, `proxy`, `webRequest`,
 `declarativeNetRequest`, `nativeMessaging`, or clipboard permissions.
 
-> Firefox ships from a separate repository
-> ([goPrivateQuickly-Firefox](https://github.com/DJCastle/goPrivateQuickly-Firefox))
-> and requests `storage` only — Firefox's `BrowserSetting` API has no
-> private-session scope, so it never requests `privacy` and offers no
-> Hardened Mode.
+The `privacy` permission was removed in 1.2.1 together with Hardened Private
+Mode. The extension now changes no browser settings — it only opens private
+windows, one click from the toolbar, the same as the
+[Firefox build](https://github.com/DJCastle/goPrivateQuickly-Firefox).
 
-## Reviewer note — why each permission is required
+APIs used without a permission: `chrome.action` (toolbar click and icon),
+`chrome.windows` (open an incognito window; read the focused window's
+`incognito` flag to pick the icon), `chrome.tabs.create` (open the extension's
+own onboarding page and, on request, the browser's extensions page),
+`chrome.runtime`, and `chrome.extension.isAllowedIncognitoAccess()` (onboarding
+status). None of these read tab URLs or page content.
 
-- **`storage`** — The only data stored is the user's own preferences (the three
-  advanced Hardened Mode toggles, in `storage.sync` with a `storage.local`
-  fallback) plus an `onboardingShown` flag in `storage.local` so the welcome
-  page opens once. Total size is well under 1 KB. No browsing
-  history, URLs, queries, page content, cookies, or identifiers are ever stored.
-  Nothing is transmitted.
+## Reviewer note — why `storage` is required
 
-- **`privacy`** — Hardened Private Mode applies a fixed,
-  documented set of privacy protections to the **private session only**, using
-  the `incognito_session_only` scope. This scope means: (a) the user's normal
-  browsing settings are never changed; (b) the browser clears the values
-  automatically when the last private window closes; and (c) because the values
-  live only in the incognito session's memory, an unexpected browser exit cannot
-  leave a hardened value behind — a fresh launch always starts from the
-  browser's own defaults. The permission is also what lets the extension read
-  `levelOfControl` so it skips, rather than overrides, any setting controlled
-  by enterprise policy or another extension.
+- **`storage`** — The only data stored is a single `onboardingShown` boolean so
+  the one-time welcome page doesn't re-open. Total size is a few bytes. No
+  settings, browsing history, URLs, queries, page content, cookies, or
+  identifiers are ever stored. Nothing is transmitted.
 
-## What Hardened Private Mode never touches
+## What this build never changes
 
-Security protections are explicitly out of scope and are never read or written:
-Safe Browsing, phishing/malware protection, certificate validation, HTTPS
-protections, browser-update checks, download scanning, password-manager
-protections, and autofill. Privacy hardening never reduces browser security.
+The extension changes no browser settings at all — it only opens private
+windows. Security protections are never read or written: Safe Browsing,
+phishing/malware protection, certificate validation, HTTPS protections,
+browser-update checks, download scanning, password-manager protections, and
+autofill.
 
 ## No remote code, no network
 

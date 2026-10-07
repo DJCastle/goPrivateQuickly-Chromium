@@ -1,32 +1,24 @@
 // Go Private Quickly — background script
 //
 // Responsibilities:
+//   - Toolbar click opens a new private window.
 //   - Toolbar icon reflects whether the currently focused window is private
 //     (muted silver mask when private, colorful otherwise).
 //   - On first install, open the onboarding page once.
 //
-// The toolbar click opens the popup (manifest "action.default_popup"), which
-// offers the standard and hardened private-window actions. A manifest can't
-// have both a default_popup and an action.onClicked handler, so the
-// window-open logic lives in the popup, not here.
+// The toolbar click opens a private window directly — there is no popup. The
+// click runs here in the service worker rather than in a popup, so nothing can
+// be cut short by a popup closing as the new window takes focus.
 //
-// The "open-hardened" keyboard command (manifest "commands") is the one action
-// handled here: it runs the same hardened-session code as the popup.
-//
-// Hardened Private Mode applies privacy settings with Chromium's
-// incognito_session_only scope (auto-cleared when the last private window
-// closes). Nothing is ever written at a scope that could outlive the session.
+// If the browser refuses to open the window, the click opens onboarding (which
+// walks the user through allowing GPQ in private windows) rather than failing
+// silently.
 //
 // Notes:
 //   - Chromium MV3 idles the service worker — never cache state in module
 //     scope. Every event handler re-derives state from the browser.
 
-import {
-  openHardenedSession,
-  focusWindow,
-} from "./shared/sessionManager.js";
-import { buildHardenedSet } from "./shared/hardenedDefaults.js";
-import { getPrefs } from "./shared/prefs.js";
+import { openPrivateWindow } from "./launch.js";
 
 // Ships a single icon style ("venetian-mask"). To add more styles
 // later, drop additional <style>/ folders under src/icons/.
@@ -64,11 +56,11 @@ chrome.windows.onFocusChanged.addListener(refreshIconForFocusedWindow);
 chrome.windows.onCreated.addListener(refreshIconForFocusedWindow);
 chrome.windows.onRemoved.addListener(refreshIconForFocusedWindow);
 
-// Run once at worker/event-page startup so the icon is correct as soon
-// as the extension wakes up (e.g., after a service-worker idle).
+// Run once at worker startup so the icon is correct as soon as the
+// extension wakes up (e.g., after a service-worker idle).
 refreshIconForFocusedWindow();
 
-// ---- Keyboard shortcut: open a hardened private window ------------------
+// ---- Toolbar click: open a private window ------------------------------
 
 async function openOnboarding() {
   try {
@@ -78,14 +70,9 @@ async function openOnboarding() {
   }
 }
 
-chrome.commands.onCommand.addListener(async (command) => {
-  if (command !== "open-hardened") return;
-  const result = await openHardenedSession(buildHardenedSet(await getPrefs()));
-  if (result.ok) {
-    await focusWindow(result.windowId);
-  } else if (result.reason === "not-allowed") {
-    await openOnboarding();
-  }
+chrome.action.onClicked.addListener(async () => {
+  const result = await openPrivateWindow();
+  if (!result.ok) await openOnboarding();
 });
 
 // ---- First-install onboarding ------------------------------------------

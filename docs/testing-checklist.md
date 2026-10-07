@@ -1,4 +1,4 @@
-# Testing Checklist — Go Private Quickly (Hardened Private Mode)
+# Testing Checklist — Go Private Quickly (Chromium)
 
 Manual checklist plus the automated suite. Run before every store submission.
 
@@ -9,9 +9,9 @@ Manual checklist plus the automated suite. Run before every store submission.
 node --test
 ```
 
-Covers the declarative setting builder and the Chromium adapter decision logic
-(applied / already-protected / blocked / unavailable / failed) with a mocked
-`chrome.privacy`. Browser-integration behavior is manual.
+Covers the toolbar-click path in `src/launch.js` with a mocked `chrome`:
+exactly one incognito window is requested, and a refused window reports
+failure instead of throwing. Browser-integration behavior is manual.
 
 ## Build
 
@@ -19,6 +19,8 @@ Covers the declarative setting builder and the Chromium adapter decision logic
 node build.mjs
 # load dist/chromium/ unpacked in a Chromium browser
 ```
+
+- [ ] `dist/chromium/` contains no `.DS_Store` files.
 
 ## Browsers to cover
 
@@ -29,66 +31,40 @@ node build.mjs
 
 ## Functional tests
 
-- [ ] Standard **Standard Private Window** opens a normal private/incognito
-      window with no settings changed.
-- [ ] Toolbar click opens the popup; **Open Hardened Private Window** is
-      focused so Enter triggers it immediately.
-- [ ] **Open Hardened Private Window** opens a private window, applies the
-      hardened settings, brings the window to the front, and closes the popup.
-- [ ] If GPQ is **not yet allowed in incognito**, the hardened action opens the
-      onboarding page instead of half-applying.
-- [ ] Multiple private windows can be opened safely; opening a second hardened
-      window does not error.
-- [ ] Hardened settings remain active while any private window is open. Verify
-      e.g. `chrome://settings` / a WebRTC leak test page reflects the hardened
-      value inside the private session.
-- [ ] Settings restore automatically when the **last** private window closes —
-      normal windows show the original values.
-- [ ] After closing all private windows and restarting the browser, no hardened
-      value persists (fresh session starts at browser defaults).
-- [ ] Force-quit the browser mid-hardened-session, relaunch: no hardened value
-      persists in normal browsing (incognito-session-only is memory-only).
-- [ ] Normal (non-private) browsing settings remain unchanged throughout.
-- [ ] A setting controlled by **enterprise policy** or **another extension** is
-      handled gracefully (the rest still apply), not a crash.
-- [ ] **Privacy Sandbox** toggles (Topics, Ad measurement, Related Website
-      Sets, FLEDGE) are handled correctly: already-protected in incognito, or
-      skipped as unavailable on Chrome versions that removed them.
-- [ ] **Alt+Shift+H** (Option+Shift+H on Mac) opens a focused Hardened
-      window; with incognito access off it opens onboarding and no window.
-- [ ] Hardened button with incognito access off: onboarding opens and **no**
-      private window is left behind.
-- [ ] **Third-party cookies** are handled when the browser already blocks them
-      in private mode; existing cookie exceptions are not overridden.
+- [ ] Clicking the toolbar icon opens a new private (incognito / InPrivate)
+      window immediately — there is no popup.
+- [ ] The toolbar icon reflects window state: muted silver mask while a private
+      window is focused, full-color mask otherwise; it updates as focus moves
+      between windows.
+- [ ] If GPQ is **not yet allowed in incognito**, clicking the icon opens the
+      onboarding page instead of failing silently, and no window is opened.
+- [ ] After enabling "Allow in Incognito" (Edge: "Allow in InPrivate"),
+      clicking the icon opens a private window.
+- [ ] Multiple private windows can be opened safely; repeated clicks don't error.
+- [ ] No browser settings change: normal and private browsing settings are
+      the same before and after using GPQ.
 
 ## Onboarding
 
 - [ ] On first install the welcome page opens automatically (once).
-- [ ] "Open Allow in Incognito setting" opens `chrome://extensions/?id=…` (or
-      reveals the copy-paste fallback if the browser refuses).
-- [ ] After enabling "Allow in Incognito," **Re-check** flips the page to the
+- [ ] Chrome/Brave/Vivaldi: the button reads "Open Allow in Incognito setting"
+      and opens `chrome://extensions/?id=…` (or reveals the copy-paste
+      fallback if the browser refuses).
+- [ ] Edge: the button reads "Open Allow in InPrivate setting" and opens
+      `edge://extensions/?id=…` with the Edge Add-ons id.
+- [ ] After enabling the toggle, **Re-check** flips the page to the
       "You're all set" state.
-
-## Advanced options
-
-- [ ] All three advanced toggles are **off** by default.
-- [ ] Each advanced toggle shows its warning text.
-- [ ] Strict WebRTC routing applies `proxy_only` when enabled.
-- [ ] "Disable WebRTC entirely" shows the not-available note (no Chromium API).
-- [ ] Disable referrer headers applies when enabled.
-- [ ] Advanced preferences persist across browser restarts.
 
 ## Privacy & data hygiene
 
-- [ ] No external network requests anywhere (DevTools → Network, popup +
-      background + options).
+- [ ] No external network requests anywhere (DevTools → Network, background
+      service worker + onboarding).
 - [ ] No private-window URLs are stored in sync/local/session storage.
 - [ ] No private-window URLs appear in console logs.
 - [ ] No remote resources (scripts, fonts, images) are loaded.
-- [ ] Storage contains only the three documented advanced-toggle keys.
+- [ ] Storage contains only the `onboardingShown` flag.
 
 ## Accessibility
 
-- [ ] Full keyboard navigation of the popup (Tab order, Enter, Esc).
-- [ ] Advanced `<details>` summary and all controls are reachable and labeled.
-- [ ] Onboarding controls are reachable and labeled for screen readers.
+- [ ] Onboarding controls are reachable by keyboard and labeled for screen
+      readers.

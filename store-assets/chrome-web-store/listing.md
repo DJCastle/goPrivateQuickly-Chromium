@@ -20,9 +20,9 @@ _Max 45 chars. Currently: 22._
 _CWS shows the manifest `description` as the summary; keep this text and
 `manifest.json` `description` identical._
 
-> Open a new private/incognito window with one click, with an optional hardened mode that tightens privacy settings for that session.
+> Open a new private/incognito window with one click, right from your toolbar. Free, open source, and genuinely zero-tracking.
 
-_Max 132 chars. Currently: 131._
+_Max 132 chars. Currently: 124._
 
 ## Category
 
@@ -38,33 +38,31 @@ dedicated Privacy category; Productivity is the closest fit.)
 ## Detailed description
 
 ```
-Go Private Quickly does one small thing and tries to do it well: it puts a button in your toolbar that opens a new incognito window. Click the icon, click the button, you're private. That's the whole idea.
+Go Private Quickly does one small thing and tries to do it well: it puts a button in your toolbar that opens a new incognito window. Click the icon, you're private. That's the whole idea.
 
 I built it because I open incognito windows all day and wanted it to be one click instead of a trip through a menu — and because I wanted something that stayed out of the way and didn't quietly phone home. This one never connects to the internet at all.
 
 WHAT YOU GET
-- One click to a new incognito window, straight from the toolbar.
-- A toolbar icon that quietly shows whether the window you're in is private.
-- An optional "Hardened" mode that opens an incognito window and tightens a set of privacy settings for that session only: WebRTC IP protection, network prediction, search suggestions, hyperlink auditing, third-party cookies, Chrome's advertising APIs where your browser still has them, and more. Your browser puts them all back automatically when the last incognito window closes, so your normal browsing is never changed — and security protections (Safe Browsing, your password manager, certificate/HTTPS checks, updates) are never touched.
-- A keyboard shortcut (Alt+Shift+H, or Option+Shift+H on Mac) that opens a Hardened window directly.
-- A few optional Advanced toggles for power users (stricter WebRTC routing, disabling referrer headers) — off by default, each clearly labeled with its trade-off.
+- One click to a new incognito window, straight from the toolbar. No popup, no menu, nothing to configure.
+- A toolbar icon that quietly shows whether the window you're in is private: a muted silver mask in a private window, full color everywhere else.
+- If your browser hasn't allowed GPQ in incognito yet, the click opens a short setup page instead of doing nothing.
 
 WHAT IT HONESTLY DOES NOT DO (I'd rather set expectations than oversell)
 - It's not a VPN. Your network, ISP, employer, or school can still see the sites you visit.
 - It doesn't hide your IP, block ads or trackers, or make you anonymous.
-- It doesn't touch your normal browsing or clear anything.
+- It doesn't change any browser settings, touch your normal browsing, or clear anything.
 
-If you want real anonymity, use Tor. For network privacy, a reputable VPN. For tracker blocking, uBlock Origin. GPQ plays nicely alongside all of them — it just gets you into a private window faster, and optionally tightens the browser's own privacy settings while you're there.
+If you want real anonymity, use Tor. For network privacy, a reputable VPN. For tracker blocking, uBlock Origin. GPQ plays nicely alongside all of them — it just gets you into a private window faster.
 
 PRIVACY, FOR REAL
 - No data collection. None.
 - No analytics, no telemetry, no error reporting.
 - Zero network requests — the extension never connects to the internet, period.
-- Two permissions, both minimal: "storage" (remembers your own settings) and "privacy" (used only to apply the hardening to the incognito session you open — never to your normal browsing).
+- One permission: "storage," used only to remember that you've seen the one-time welcome page. There are no settings to store.
 - No third-party code, no CDNs, no remote scripts. It's open source, so you can read every line.
 
 ONE-TIME SETUP
-By browser security policy, an extension can't switch itself on in incognito windows. The first time you install, a short welcome page walks you through flipping "Allow in Incognito." You only do it once.
+By browser security policy, an extension can't switch itself on in incognito windows. The first time you install, a short welcome page walks you through flipping "Allow in Incognito" (on Edge, "Allow in InPrivate"). You only do it once.
 
 Works on Chrome and every Chromium browser — Brave, Microsoft Edge, Arc, and Vivaldi all install it from here.
 
@@ -74,27 +72,26 @@ Privacy Policy: https://codecraftedapps.com/extensions/go-private-quickly/privac
 Terms of Use: https://codecraftedapps.com/extensions/go-private-quickly/terms.html
 ```
 
-_CWS allows up to 16,000 characters here. Above is well under the limit._
+_CWS allows up to 16,000 characters here. Currently: 2431._
 
 ## Single purpose description
 
 CWS requires extensions to declare a single, narrow purpose. Use this:
 
-> Go Private Quickly's single purpose is to open a private/incognito browser window from the toolbar, with an optional Hardened Private Mode that applies privacy-hardening settings to that private session only. The extension does not perform any other function.
+> Go Private Quickly's single purpose is to open a new private/incognito browser window when the user clicks its toolbar icon. The toolbar icon also shows whether the focused window is private. The extension changes no browser settings and performs no other function.
+
+_Max 1,000 chars. Currently: 265._
 
 ## Permission justifications
 
-For each permission CWS asks you to justify, paste this:
+The only permission is `storage`. If the dashboard still lists a `privacy`
+justification from 1.2.0, clear it — 1.2.1 no longer requests `privacy`.
 
 ### `storage`
 
-> Used solely to persist the user's own settings (the three advanced Hardened Mode privacy toggles) so they survive browser restarts and sync across the user's own devices via the browser's built-in sync, plus a single onboardingShown flag in chrome.storage.local so the one-time welcome page doesn't re-open. No personal data or browsing data is stored. Settings use `chrome.storage.sync` with a `chrome.storage.local` fallback if sync is unavailable.
+> Used solely to store a single onboardingShown flag in chrome.storage.local, so the one-time welcome page that explains how to allow the extension in incognito opens only once, on first install. No settings, personal data, or browsing data (URLs, history, tabs, page content) are stored, and nothing is synced or transmitted.
 
-### `privacy`
-
-> Used only by the optional Hardened Private Mode, and only when the user opens a hardened private window. It applies a fixed, documented set of privacy settings (WebRTC IP handling, network prediction, search suggestions, hyperlink auditing, alternate error pages, online spelling service, third-party cookies, and the Topics, Ad-measurement, Related Website Sets and Protected Audience APIs where available), plus two opt-in advanced options (strict WebRTC routing, disabling referrer headers), all with the incognito_session_only scope, so they apply to the private session only and the browser clears them when the last private window closes. Normal browsing settings are never changed. Security settings (Safe Browsing, password manager, certificate/HTTPS/update/download protections, autofill) are never read or modified. It also reads each setting's levelOfControl so it skips any setting locked by policy or another extension.
-
-_Max 1,000 chars. Currently: 932._
+_Max 1,000 chars. Currently: 324._
 
 ## Host permission justifications
 
@@ -102,7 +99,7 @@ _Max 1,000 chars. Currently: 932._
 
 ## Remote code justification
 
-> None — Go Private Quickly does not load or execute remote code. All JavaScript ships in the extension package and runs under the default Manifest V3 Content Security Policy. There is no `eval`, no remote script loading, and no network requests of any kind.
+> None — Go Private Quickly does not load or execute remote code. All JavaScript ships in the extension package and runs under a strict Content Security Policy (script-src 'self'; object-src 'self'). There is no `eval`, no remote script loading, and no network requests of any kind.
 
 ## Data usage / data privacy disclosures
 
@@ -119,14 +116,14 @@ Privacy Policy URL (required field):
 
 ## Screenshots — 1280×800 PNG (exactly)
 
-Three are prepared in this folder (`chrome-1.png`, `chrome-2.png`,
-`chrome-3.png`), already sized to 1280×800. Suggested upload order and
-captions:
+**Recapture before submitting 1.2.1.** The three files in this folder
+(`chrome-1.png`, `chrome-2.png`, `chrome-3.png`) are from 1.2.0 and show the
+removed popup and settings page. Replace them with 1.2.1 captures, in this
+order:
 
-1. **chrome-2.png — private window + popup** — Chrome's "You've gone Incognito" tab with the GPQ popup open. Caption: "Click → instant private window. Hardened or Standard, your choice."
-2. **chrome-3.png — Options** — the Settings page with Advanced expanded, showing the greyed-out "Disable WebRTC entirely". Caption: "Optional Hardened Mode with opt-in advanced settings."
-3. **chrome-1.png — the website + popup** — the popup over the CodeCraftedApps GPQ page. Caption: "Open source, zero tracking, zero network requests."
-4. **chrome-4.png — keyboard shortcut** — the welcome page, or `chrome://extensions/shortcuts` showing Alt+Shift+H. Caption: "Alt+Shift+H opens a Hardened window without the popup."
+1. **chrome-1.png — private window** — Chrome's "You've gone Incognito" tab with the silver GPQ mask in the toolbar. Caption: "One click → a new incognito window. No popup, no menu."
+2. **chrome-2.png — icon state** — a normal window showing the full-color mask beside a private window showing the silver mask. Caption: "The toolbar icon shows when you're private."
+3. **chrome-3.png — welcome page** — the one-time setup page showing "Allow in Incognito". Caption: "One-time setup, then it's one click forever. Zero tracking, zero network requests."
 
 Screenshots: full-bleed window content, square corners, no padding or
 shadow. Capture from the store build (not Developer mode / unpacked).

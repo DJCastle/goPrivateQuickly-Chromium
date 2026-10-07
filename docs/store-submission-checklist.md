@@ -23,23 +23,28 @@ repo. Run the [testing checklist](testing-checklist.md) first.
 
 - [ ] Developer account active ($5 fee paid).
 - [ ] Manifest V3, `minimum_chrome_version` set.
-- [ ] Permissions = `["storage", "privacy"]` only. No host permissions.
-- [ ] **Single purpose**: "Open a private/incognito window from the toolbar,
-      with an optional Hardened Private Mode that applies session-scoped
-      privacy settings to that private window only."
+- [ ] Permissions = `["storage"]` only. No `privacy`, no host permissions.
+- [ ] **Single purpose**: "Open a private/incognito window from the toolbar."
+      Exact paste text in `store-assets/chrome-web-store/listing.md`.
 - [ ] Permission justifications filled in:
-  - `storage` — persists the user's own settings; no browsing data.
-  - `privacy` — applies the documented hardened settings to the private
-    session only (`incognito_session_only` scope); never changes normal
-    browsing; never disables security protections; used only when the user
-    opens a hardened window.
+  - `storage` — a single `onboardingShown` flag so the welcome page opens
+    once; no settings, no browsing data.
+- [ ] Remove the old `privacy` justification if the dashboard still shows it.
 - [ ] Host permission justification: none requested.
 - [ ] Remote code justification: none; all code is bundled; strict CSP.
 - [ ] Data privacy disclosures: collects nothing; sells nothing; no use beyond
       single purpose.
-- [ ] Screenshots updated to show the popup, a hardened private window, and the
-      advanced settings.
+- [ ] Screenshots show a one-click private window, the toolbar icon in a
+      normal and a private window, and the onboarding page (no popup, no
+      settings page).
 - [ ] Upload `dist/chromium.zip`.
+
+## Microsoft Edge Add-ons
+
+- [ ] Upload the same `dist/chromium.zip` in Partner Center.
+- [ ] Single purpose, `storage` justification, description and certification
+      notes pasted from `store-assets/edge-add-ons/listing.md`; old `privacy`
+      justification removed.
 
 ## Post-submission
 
