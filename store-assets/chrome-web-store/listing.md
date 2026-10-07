@@ -116,20 +116,16 @@ Privacy Policy URL (required field):
 
 ## Screenshots — 1280×800 PNG (exactly)
 
-**Recapture before submitting 1.3.0.** The three files in this folder
-(`chrome-1.png`, `chrome-2.png`, `chrome-3.png`) are from 1.2.0 and show the
-removed popup and settings page. Replace them with 1.3.0 captures, in this
-order:
+Submitted with 1.3.0 (2026-10-07), in this order:
 
-1. **chrome-1.png — private window** — Chrome's "You've gone Incognito" tab with the silver GPQ mask in the toolbar. Caption: "One click → a new incognito window. No popup, no menu."
-2. **chrome-2.png — icon state** — a normal window showing the full-color mask beside a private window showing the silver mask. Caption: "The toolbar icon shows when you're private."
-3. **chrome-3.png — welcome page** — the one-time setup page showing "Allow in Incognito". Caption: "One-time setup, then it's one click forever. Zero tracking, zero network requests."
+1. **chrome-1.png — welcome page** — the one-time setup page showing "Allow in Incognito". Leads, because it shows what the extension is.
+2. **chrome-2.png — private window** — Chrome's "You've gone Incognito" tab. The GPQ mask is too small to read at store size; a capture with the mask pinned and visible would be stronger.
 
 Screenshots: full-bleed window content, square corners, no padding or
 shadow. Capture from the store build (not Developer mode / unpacked).
 
-**Small promo tile (440×280) is required by CWS.** Keep a copy in this
-folder as `promo-small.png`.
+**Small promo tile (440×280) is required by CWS.** `promo-small.png` — the
+colour mask on dark indigo with the name and "One click to a private window".
 
 ## Promo video (optional, recommended)
 

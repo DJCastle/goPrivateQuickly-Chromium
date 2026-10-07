@@ -85,18 +85,17 @@ Privacy Policy: https://codecraftedapps.com/extensions/go-private-quickly/privac
 Terms of Use: https://codecraftedapps.com/extensions/go-private-quickly/terms.html
 ```
 
-**Extension logo** (required; 1:1, 300×300 recommended, 128×128 minimum):
-`src/icons/venetian-mask/icon-128.png` meets the minimum. A 300×300 export
-from the original artwork would look sharper.
+**Extension logo** (required; 1:1, 300×300 recommended): `logo-300.png`,
+exported from `tools/icon-sources/venetian-mask-inactive.png` (the colour mask).
 
-**Screenshots** (optional, up to 6, 640×480 or 1280×800): don't reuse the
-current Chrome set in `../chrome-web-store/` — it is from 1.2.0 and shows the
-removed popup and settings page. Use 1.3.0 Edge captures (an InPrivate window
-with the silver mask; the welcome page showing "Allow in InPrivate"), or skip
-screenshots until they exist.
+**Screenshots** (optional, up to 6, 640×480 or 1280×800), submitted with
+1.3.0 (2026-10-07): `edge-1.png` (welcome page showing "Allow in InPrivate")
+and `edge-2.png` (Edge's InPrivate page). The GPQ icon isn't in edge-2's
+toolbar because the capture predates allowing it in InPrivate; recapture with
+the silver mask pinned for a stronger second shot.
 
-**Small promotional tile** (optional, 440×280) and **large promotional tile**
-(optional, 1400×560): none prepared.
+**Small promotional tile** (optional, 440×280): `promo-small.png`, same as the
+Chrome tile. **Large promotional tile** (optional, 1400×560): none.
 
 **Search terms** (max 7 terms, 30 chars each, 21 words total):
 
