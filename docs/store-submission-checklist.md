@@ -1,7 +1,9 @@
 # Store Submission Checklist — Go Private Quickly (Chromium)
 
-Chrome Web Store submission for the Chromium build. Brave, Edge, Arc,
-and Vivaldi all install from the Chrome Web Store — no separate listings.
+Chrome Web Store submission for the Chromium build. Brave, Arc and Vivaldi
+install from the Chrome Web Store. Edge users can too, and Edge also has its
+own Microsoft Edge Add-ons listing built from the same zip — copy-paste fields
+in `store-assets/edge-add-ons/listing.md`.
 Firefox (AMO) is handled in the
 [goPrivateQuickly-Firefox](https://github.com/DJCastle/goPrivateQuickly-Firefox)
 repo. Run the [testing checklist](testing-checklist.md) first.

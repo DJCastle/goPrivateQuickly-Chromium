@@ -19,7 +19,8 @@ a separate repo (`goPrivateQuickly-Firefox`); the public website lives in
   2026-06-29 — Opera is Chromium-based so its users can still install from the
   Chrome Web Store, but Opera is omitted from all listings, README, and site
   copy. Don't reintroduce it to the browser lists.)
-- **Distribution:** Chrome Web Store.
+- **Distribution:** Chrome Web Store, plus Microsoft Edge Add-ons from
+  1.2.0 (same `dist/chromium.zip`; copy in `store-assets/edge-add-ons/`).
 - **History:** split out of the `DJCastle/browserExtensions` monorepo on
   2026-06-07. One-repo-per-base-browser is the standard for independent extensions; shared-engine products use a per-product monorepo (workspace decision, amended 2026-07-11).
 

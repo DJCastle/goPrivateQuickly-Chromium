@@ -4,8 +4,8 @@ This document is structured so you can copy-paste each field straight
 into the Chrome Web Store developer dashboard. The CWS listing also
 serves users of **Brave, Microsoft Edge, Arc, and Vivaldi** —
 all of those browsers install Chromium extensions directly from this
-store. Edge has its own store too, but it's not a v1 target; Edge
-users will be told to install from the CWS in support docs.
+store. Edge also gets its own Microsoft Edge Add-ons listing from the
+same zip; its copy is in `../edge-add-ons/listing.md`.
 
 ---
 
@@ -92,7 +92,9 @@ For each permission CWS asks you to justify, paste this:
 
 ### `privacy`
 
-> Used only by the optional Hardened Private Mode, and only when the user explicitly opens a hardened private window. The extension applies a fixed, documented set of privacy settings (WebRTC IP handling, network prediction, search suggestions, hyperlink auditing, alternate error pages, online spelling service, third-party cookies, and the Topics, Ad-measurement, Related Website Sets and Protected Audience advertising APIs where the browser still provides them), plus two opt-in advanced options the user can enable in Settings (strict WebRTC routing via proxy_only, and disabling referrer headers), using the `incognito_session_only` scope, so the changes apply to the private session only and the browser clears them automatically when the last private window closes. The user's normal-browsing settings are never changed. Security-related settings (Safe Browsing, password manager, certificate/HTTPS/update/download protections, autofill) are never read or modified. The permission also lets the extension read each setting's `levelOfControl` so it skips, rather than overrides, any setting locked by enterprise policy or another extension.
+> Used only by the optional Hardened Private Mode, and only when the user opens a hardened private window. It applies a fixed, documented set of privacy settings (WebRTC IP handling, network prediction, search suggestions, hyperlink auditing, alternate error pages, online spelling service, third-party cookies, and the Topics, Ad-measurement, Related Website Sets and Protected Audience APIs where available), plus two opt-in advanced options (strict WebRTC routing, disabling referrer headers), all with the incognito_session_only scope, so they apply to the private session only and the browser clears them when the last private window closes. Normal browsing settings are never changed. Security settings (Safe Browsing, password manager, certificate/HTTPS/update/download protections, autofill) are never read or modified. It also reads each setting's levelOfControl so it skips any setting locked by policy or another extension.
+
+_Max 1,000 chars. Currently: 932._
 
 ## Host permission justifications
 
