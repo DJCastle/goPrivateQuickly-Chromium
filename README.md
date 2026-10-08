@@ -54,8 +54,8 @@ those.
 - **Microsoft Edge**: also listed on
   [Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/hkkldegnjfeijmpekiklijglmfkaniop).
 
-Both store listings are being updated to 1.3.0 and may be temporarily
-unavailable while it is in review.
+1.3.0 is live on Microsoft Edge Add-ons. The Chrome Web Store listing is
+in review and may be temporarily unavailable.
 
 Using Firefox? It's a separate package —
 [goPrivateQuickly-Firefox](https://github.com/DJCastle/goPrivateQuickly-Firefox).
