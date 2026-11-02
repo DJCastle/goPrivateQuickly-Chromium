@@ -5,13 +5,12 @@ Upload the same `dist/chromium.zip` as the Chrome Web Store — no Edge-specific
 build. Requirements checked against Microsoft's "Publish a Microsoft Edge
 extension" doc (updated 2026-09-02).
 
-**Store identity** (Partner Center › Extension overview; 1.2.0 submitted
-2026-10-06, unpublished pending the 1.3.0 review):
+**Store identity** (Partner Center › Extension overview; 1.3.0 live):
 
 - Store ID: `0RDCKCF7R29J`
 - CRX ID: `hkkldegnjfeijmpekiklijglmfkaniop` — differs from the Chrome Web Store
   ID, so Edge users' `edge://extensions/?id=` link uses this one.
-- Listing URL (live once certified):
+- Listing URL:
   `https://microsoftedge.microsoft.com/addons/detail/hkkldegnjfeijmpekiklijglmfkaniop`
 
 Name and short description come from `manifest.json` and are read-only in

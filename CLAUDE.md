@@ -22,7 +22,7 @@ a separate repo (`goPrivateQuickly-Firefox`); the public website lives in
   copy. Don't reintroduce it to the browser lists.)
 - **Distribution:** Chrome Web Store, plus Microsoft Edge Add-ons from
   1.2.0 (same `dist/chromium.zip`; copy in `store-assets/edge-add-ons/`).
-  Both listings are unpublished pending the 1.3.0 review.
+  Both listings are live at 1.3.0.
 - **Hardened Private Mode was removed in 1.3.0** (with the popup, settings
   page, Alt+Shift+H and the `privacy` permission): it failed silently for
   users. Don't reintroduce it without the owner's explicit decision.
