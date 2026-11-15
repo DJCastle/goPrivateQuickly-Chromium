@@ -226,9 +226,13 @@ complication, Live Activity.
   explain *why*, not just *what*.
 - Diff a file before staging it when it already shows as modified.
 - Commit as you go, push on topic change — without asking:
-  - Commit after each verified fix: one fix, one commit, only that fix's files.
-    Say so in one line ("Committed: <what>"). Never commit broken or half-done
-    work; on a switch mid-fix, say what's left uncommitted.
+  - Commit after each finished change — a code fix, or a docs, memory, config,
+    status or plan edit: one change, one commit, only its files. Say so in one
+    line ("Committed: <what>"). Never commit broken or half-done work; on a
+    switch mid-change, say what's left uncommitted.
+  - Commit before handing a repo to another AI (Codex, Xcode's agent, a pull
+    request from Codex), so two agents' edits never share a working tree.
+  - Before a risky change, commit first — that commit is the checkpoint (below).
   - Push when the topic changes (another area, section, problem or repo, or Don
     says "moving on") and at session end: "Pushed — moving on to <topic>." Also
     push when Don confirms a build and a section is done.
